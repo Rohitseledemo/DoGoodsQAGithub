@@ -1,0 +1,8 @@
+image: maven:3.3.9
+pipelines:
+  master:
+    - step:
+        name: Regression Test
+        script:
+          - mvn clean
+          - mvn test # Your test runner command to run the tests
