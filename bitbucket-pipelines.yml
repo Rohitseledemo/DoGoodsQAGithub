@@ -1,8 +1,10 @@
 image: maven:3.3.9
 pipelines:
+ branches:
   master:
-    - step:
-        name: Regression Test
-        script:
-          - mvn clean
-          - mvn test # Your test runner command to run the tests
+   - step:
+      name: Regression Test
+      deployment: Production
+      script:
+        - mvn clean
+        - mvn test # Your test runner command to run the tests
