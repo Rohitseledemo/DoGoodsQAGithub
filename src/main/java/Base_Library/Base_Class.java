@@ -11,20 +11,32 @@ import waitutility.WaitUtility;
 public class Base_Class {
 	
 	public static WebDriver driver = null;
-		
+
+	String username = System.getenv("BROWSERSTACK_USERNAME");
+	String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
+
+	MutableCapabilities capabilities = new MutableCapabilities();
+	capabilities.setCapability("browserName", "Chrome");
+	HashMap<String, Object> browserstackOptions = new HashMap<String, Object>();
+	browserstackOptions.put("os", "Windows");
+	capabilities.setCapability("bstack:options", browserstackOptions);
+
+	WebDriver driver = new RemoteWebDriver(new URL("https://" + username + ":" + accessKey + "@hub.browserstack.com/wd/hub"), capabilities);
+
+	
 	@BeforeTest
 	@Parameters(value = {"browser"})
 	public void initializeBrowser(String browser) {
 		if (browser.equalsIgnoreCase("Chrome")) {
 			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
+			//driver = new ChromeDriver();
 			System.out.println("Chrome is Launched ");
 
 		}
 
 		else if (browser.equalsIgnoreCase("firefox")) {
 			WebDriverManager.firefoxdriver().setup();
-			driver = new FirefoxDriver();
+			//driver = new FirefoxDriver();
 			System.out.println("Firebox is Launched ");
 
 		}
@@ -32,7 +44,7 @@ public class Base_Class {
 		else if (browser.equalsIgnoreCase("edge")) {
 
 			WebDriverManager.edgedriver().setup();
-			driver = new EdgeDriver();
+			//driver = new EdgeDriver();
 			System.out.println("Edge Browser is Launched ");
 
 		}
