@@ -24,11 +24,12 @@ public class BrowserKeeper {
        browserstackOptions.put("os", "Windows");
        capabilities.setCapability("bstack:options", browserstackOptions);
        browser = new RemoteWebDriver(new URL("https://" + username + ":" + accessKey + "@hub.browserstack.com/wd/hub"), capabilities);
-//        DesiredCapabilities caps=new DesiredCapabilities();
-//		ChromeOptions option=new ChromeOptions();
-//		option.addArguments("start-maximized");
-//		option.merge(caps);
-//	    browser = new ChromeDriver(option);
+
+       //DesiredCapabilities caps=new DesiredCapabilities();
+       //ChromeOptions option=new ChromeOptions();
+		//option.addArguments("start-maximized");
+		//option.merge(caps);
+	    //browser = new ChromeDriver(option);
    }
    
    public  WebDriver getBrowserInstance() {
