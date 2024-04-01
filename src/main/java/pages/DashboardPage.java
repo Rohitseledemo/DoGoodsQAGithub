@@ -7,6 +7,6 @@ public class DashboardPage extends BasePage{
     By signOutBtn;
     public DashboardPage(){
         this.signOutBtn= By.xpath("//a[normalize-space()='Sign Out']");
-        System.out.println("hello");
+        System.out.println("hello 2");
     }
 }
