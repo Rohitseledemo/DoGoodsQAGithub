@@ -1,4 +1,4 @@
-package stepDefinitions;
+package test;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 
