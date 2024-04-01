@@ -28,7 +28,6 @@ public class BrowserKeeper {
 //		ChromeOptions option=new ChromeOptions();
 //		option.addArguments("start-maximized");
 //		option.merge(caps);
-//		System.setProperty("webdriver.chrome.driver","src/main/resources/chromeDriver/chromedriver.exe");
 //	    browser = new ChromeDriver(option);
    }
    
