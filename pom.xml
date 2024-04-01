@@ -110,7 +110,7 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
                             <suiteXmlFiles>
-                                <suiteXmlFile>testng.xml</suiteXmlFile>
+                                <suiteXmlFile>src\main\java\Runner/testng.xml</suiteXmlFile>
                             </suiteXmlFiles>
                         </configuration>
                     </plugin>
