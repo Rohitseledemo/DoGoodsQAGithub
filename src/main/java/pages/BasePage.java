@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import utility.BrowserKeeper;
 
+import java.net.MalformedURLException;
+
 public class BasePage {
   public BrowserKeeper driver;
   public BasePage(){
@@ -12,7 +14,7 @@ public class BasePage {
   public  WebDriver getBrowser(){
       return this.driver.getBrowserInstance();
   }
-  public void launchNewBrowserInstance() {
+  public void launchNewBrowserInstance() throws MalformedURLException {
 	  driver.setupWebDriver();
   }
   public void closePage(){
@@ -20,11 +22,12 @@ public class BasePage {
   }
 
   public void closeBrowser() {
-	  this.getBrowser().quit();
+
+      this.getBrowser().quit();
   }
 
   public void launchUrl(String URL) {
-	  this.getBrowser().get(URL);
+      this.getBrowser().get(URL);
   }
 }
   
