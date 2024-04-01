@@ -14,10 +14,10 @@ public class BrowserKeeper {
 	   
    }
    public void setupWebDriver() throws MalformedURLException {
-//       String username = System.getenv("BROWSERSTACK_USERNAME");
-//       String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
-       String username = "rohitkumar_ufv9J8";
-       String accessKey = "FYLuo28MBhzbbAhQCXxz";
+       String username = System.getenv("BROWSERSTACK_USERNAME");
+       String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
+//       String username = "rohitkumar_ufv9J8";
+//       String accessKey = "FYLuo28MBhzbbAhQCXxz";
        MutableCapabilities capabilities = new MutableCapabilities();
        capabilities.setCapability("browserName", "Chrome");
        HashMap<String, String> browserstackOptions = new HashMap<String, String>();
