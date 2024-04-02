@@ -2,7 +2,8 @@ package pages;
 import org.openqa.selenium.By;
 
 public class LoginPage extends BasePage{
-    By emailAddress, password,signIn,emailError,rememberMe,forgetPassword,passwordError,loginError,enterPasswordError;
+    By emailAddress, password,signIn,emailError,rememberMe,forgetPassword,
+            passwordError,emptyEmailError,emptyPasswordError,loginSuccessCheck;
     public LoginPage(){
         this.emailAddress = By.xpath("//input[@id='email_addtess']");
         this.password = By.xpath("//input[@id='login_pass']");
@@ -11,8 +12,9 @@ public class LoginPage extends BasePage{
         this.rememberMe=By.xpath("//input[@id='gridCheck']");
         this.forgetPassword= By.xpath("//a[@class='text-secondary text-decoration-none font-weight-bold fget']");
         this.passwordError=By.xpath("//span[@class='text-danger']");
-        this.loginError=By.id("login_error");
-        this.enterPasswordError=By.id("pass_error");
+        this.emptyEmailError=By.id("login_error");
+        this.emptyPasswordError=By.id("pass_error");
+        this.loginSuccessCheck=By.xpath("//span[@class='d-inline-block text-left mr-2']");
     }
     public void setEmailAddress(String inputEmail){
     	this.getBrowser().findElement(emailAddress).sendKeys(inputEmail);
@@ -26,8 +28,24 @@ public class LoginPage extends BasePage{
     public void rememberMeClick(){
     	this.getBrowser().findElement(rememberMe).click();
     }
-    public void ForgetPasswordClick(){
-    	this.getBrowser().findElement(forgetPassword).click();
+    public void verifyForgetPasswordClick(){
+
+        this.getBrowser().findElement(forgetPassword).click();
+    }
+    public Boolean wrongEmailErrorDisplayed(String wrongEmailString){
+        return this.getBrowser().findElement(emailError).isDisplayed();
+    }
+    public Boolean wrongPasswordErrorDisplayed(String wrongPasswordString){
+        return this.getBrowser().findElement(passwordError).isDisplayed();
+    }
+    public Boolean emptyPasswordErrorDisplayed(String emptyPasswordString){
+        return this.getBrowser().findElement(emptyPasswordError).isDisplayed();
+    }
+    public Boolean emptyEmailErrorDisplayed(String emptyEmailString){
+        return this.getBrowser().findElement(emptyEmailError).isDisplayed();
+    }
+    public Boolean loginVerify(String adminName){
+        return this.getBrowser().findElement(loginSuccessCheck).isDisplayed();
     }
 
 
