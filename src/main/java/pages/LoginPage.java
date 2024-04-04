@@ -32,19 +32,19 @@ public class LoginPage extends BasePage{
 
         this.getBrowser().findElement(forgetPassword).click();
     }
-    public Boolean wrongEmailErrorDisplayed(String wrongEmailString){
+    public boolean wrongEmailErrorDisplayed(String wrongEmailString){
         return this.getBrowser().findElement(emailError).isDisplayed();
     }
-    public Boolean wrongPasswordErrorDisplayed(String wrongPasswordString){
+    public boolean wrongPasswordErrorDisplayed(String wrongPasswordString){
         return this.getBrowser().findElement(passwordError).isDisplayed();
     }
-    public Boolean emptyPasswordErrorDisplayed(String emptyPasswordString){
+    public boolean emptyPasswordErrorDisplayed(String emptyPasswordString){
         return this.getBrowser().findElement(emptyPasswordError).isDisplayed();
     }
-    public Boolean emptyEmailErrorDisplayed(String emptyEmailString){
+    public boolean emptyEmailErrorDisplayed(String emptyEmailString){
         return this.getBrowser().findElement(emptyEmailError).isDisplayed();
     }
-    public Boolean loginVerify(String adminName){
+    public boolean loginVerify(String adminName){
         return this.getBrowser().findElement(loginSuccessCheck).isDisplayed();
     }
 
