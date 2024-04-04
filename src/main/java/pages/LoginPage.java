@@ -1,9 +1,20 @@
 package pages;
 import org.openqa.selenium.By;
+import org.testng.Assert;
+import utility.BrowserKeeper;
 
 public class LoginPage extends BasePage{
-    By emailAddress, password,signIn,emailError,rememberMe,forgetPassword,
-            passwordError,emptyEmailError,emptyPasswordError,loginSuccessCheck;
+    BrowserKeeper browser = new BrowserKeeper();
+    By emailAddress;
+    By password;
+    By signIn;
+    By emailError;
+    By rememberMe;
+    By forgetPassword;
+    By passwordError;
+    By emptyEmailError;
+    By emptyPasswordError;
+    By loginSuccessCheck;
     public LoginPage(){
         this.emailAddress = By.xpath("//input[@id='email_addtess']");
         this.password = By.xpath("//input[@id='login_pass']");
@@ -29,23 +40,28 @@ public class LoginPage extends BasePage{
     	this.getBrowser().findElement(rememberMe).click();
     }
     public void verifyForgetPasswordClick(){
-
+        this.driver.waitForPresenceOfElement(2,forgetPassword);
         this.getBrowser().findElement(forgetPassword).click();
     }
-    public boolean wrongEmailErrorDisplayed(String wrongEmailString){
-        return this.getBrowser().findElement(emailError).isDisplayed();
+    public void wrongEmailErrorDisplayed(){
+        this.driver.waitForPresenceOfElement(2,loginSuccessCheck);
+        Assert.assertTrue(this.getBrowser().findElement(emailError).isDisplayed());
     }
-    public boolean wrongPasswordErrorDisplayed(String wrongPasswordString){
-        return this.getBrowser().findElement(passwordError).isDisplayed();
+    public void wrongPasswordErrorDisplayed(){
+        this.driver.waitForPresenceOfElement(2,passwordError);
+        Assert.assertTrue(this.getBrowser().findElement(passwordError).isDisplayed());
     }
-    public boolean emptyPasswordErrorDisplayed(String emptyPasswordString){
-        return this.getBrowser().findElement(emptyPasswordError).isDisplayed();
+    public void emptyPasswordErrorDisplayed(){
+        this.driver.waitForPresenceOfElement(2,emptyPasswordError);
+        Assert.assertTrue(this.getBrowser().findElement(emptyPasswordError).isDisplayed());
     }
-    public boolean emptyEmailErrorDisplayed(String emptyEmailString){
-        return this.getBrowser().findElement(emptyEmailError).isDisplayed();
+    public void emptyEmailErrorDisplayed(){
+        this.driver.waitForPresenceOfElement(2,emptyEmailError);
+        Assert.assertTrue(this.getBrowser().findElement(emptyEmailError).isDisplayed());
     }
-    public boolean loginVerify(String adminName){
-        return this.getBrowser().findElement(loginSuccessCheck).isDisplayed();
+    public void loginVerify(){
+        this.driver.waitForPresenceOfElement(2,loginSuccessCheck);
+        Assert.assertTrue(this.getBrowser().findElement(loginSuccessCheck).isDisplayed());
     }
 
 

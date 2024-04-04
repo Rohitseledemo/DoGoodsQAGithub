@@ -1,6 +1,6 @@
 package test;
+
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -10,12 +10,13 @@ import pages.LoginPage;
 import pages.respectiveClientEarningsPage;
 
 import java.net.MalformedURLException;
-public class EarningsPageTest {
+
+public class respectiveClientPageTest {
     LoginPage loginPage;
     EarningsPage earningsPage;
-    respectiveClientEarningsPage rcep;
     DashboardPage dashboardPage;
-    public EarningsPageTest(){
+    public respectiveClientPageTest(){
+
     }
     @Parameters({"URL","Email","Password"})
     @BeforeTest
@@ -28,14 +29,15 @@ public class EarningsPageTest {
         loginPage.rememberMeClick();
         loginPage.signInClick();
     }
-
-
-    @AfterTest
-    public void closeApplication() throws MalformedURLException {
-        loginPage = new LoginPage();
-        loginPage.launchNewBrowserInstance();
-        loginPage.closeBrowser();
+    @Test
+    public void claimsAmountTest(){
+        dashboardPage = new DashboardPage();
+        dashboardPage.clickOnEarnings();
+        earningsPage = new EarningsPage();
+        Assert.assertTrue(earningsPage.verifyTitle());
+        earningsPage.typeClientNameAndClickOnIt();
+        respectiveClientEarningsPage rcep = new respectiveClientEarningsPage();
+        Assert.assertEquals(rcep.verifyClientName(),earningsPage.clientName);
+        //rcep.
     }
-
-
 }
