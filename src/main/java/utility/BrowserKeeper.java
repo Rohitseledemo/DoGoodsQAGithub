@@ -24,30 +24,16 @@ public class BrowserKeeper {
 	   
    }
    public void setupWebDriver() throws MalformedURLException {
-//       String username = System.getenv("BROWSERSTACK_USERNAME");
-//       String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
-//       MutableCapabilities capabilities = new MutableCapabilities();
-//       capabilities.setCapability("browserName", "Chrome");
-//       HashMap<String, String> browserstackOptions = new HashMap<String, String>();
-//       browserstackOptions.put("os", "Windows");
-//       capabilities.setCapability("bstack:options", browserstackOptions);
-//       browser = new RemoteWebDriver(new URL("https://" + username + ":" + accessKey +
-//               "@hub.browserstack.com/wd/hub"), capabilities);
-       DesiredCapabilities caps=new DesiredCapabilities();
-       ChromeOptions option=new ChromeOptions();
-       option.addArguments("start-maximized");
-       option.merge(caps);
-       System.setProperty("webdriver.chrome.driver","src/main/resources/chromeDriver/chromedriver.exe");
-       browser = new ChromeDriver(option);
+       String username = System.getenv("BROWSERSTACK_USERNAME");
+       String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
+       MutableCapabilities capabilities = new MutableCapabilities();
+       capabilities.setCapability("browserName", "Chrome");
+       HashMap<String, String> browserstackOptions = new HashMap<String, String>();
+       browserstackOptions.put("os", "Windows");
+       capabilities.setCapability("bstack:options", browserstackOptions);
+       browser = new RemoteWebDriver(new URL("https://" + username + ":" + accessKey +
+               "@hub.browserstack.com/wd/hub"), capabilities);
    }
-    public void setupWebDriverLocally(){
-        DesiredCapabilities caps=new DesiredCapabilities();
-		ChromeOptions option=new ChromeOptions();
-		option.addArguments("start-maximized");
-		option.merge(caps);
-		System.setProperty("webdriver.chrome.driver","src/main/resources/chromeDriver/chromedriver.exe");
-	    browser = new ChromeDriver(option);
-    }
    public  WebDriver getBrowserInstance() {
 	return browser;
    }
