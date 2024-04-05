@@ -15,8 +15,8 @@ public class EarningsPageTest {
     DashboardPage dashboardPage;
     public EarningsPageTest(){
     }
-    @Parameters({"URL","Email","Password"})
-    @BeforeTest
+    //@Parameters({"URL","Email","Password"})
+    //@BeforeTest
     public void launchApplication(String URL, String Email, String Password) throws MalformedURLException {
         loginPage = new LoginPage();
         loginPage.launchNewBrowserInstance();
@@ -26,7 +26,7 @@ public class EarningsPageTest {
         loginPage.rememberMeClick();
         loginPage.signInClick();
     }
-    @AfterTest
+    //@AfterTest
     public void closeApplication() throws MalformedURLException {
         loginPage = new LoginPage();
         loginPage.launchNewBrowserInstance();
