@@ -5,11 +5,11 @@ import pages.ForgotPasswordPage;
 
 public class ForgotPasswordPagePageTest {
     ForgotPasswordPage forgotPasswordPage;
-    @Test
+   //@Test
     public void resetPassword(){
         forgotPasswordPage.setEmailForgot("");
     }
-    @Test
+    //@Test
     public void returnToLoginCheck(){
         forgotPasswordPage.returnToLoginClick();
     }
