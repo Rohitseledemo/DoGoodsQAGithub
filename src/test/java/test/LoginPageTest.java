@@ -8,13 +8,15 @@ public class LoginPageTest {
     String url, email, password;
     LoginPage loginPage;
 
-    @Parameters({ "URL", "Email", "Password" })
     @BeforeTest
-    public void launchBrowser(String URL, String Email, String Password) throws MalformedURLException {
+    @Parameters({"Email", "Password","URL" })
+    public void launchBrowser(@Optional("admin@dogoodsinc.com") String email,
+                              @Optional("Admin@Shipplug2024!")String password,
+                              @Optional("https://qa-admin.dogoodsinc.com/admin/")String Url) throws MalformedURLException {
 
-        this.url = URL;
-        this.email = Email;
-        this.password = Password;
+        this.url = Url;
+        this.email = email;
+        this.password = password;
 
         loginPage = new LoginPage();
         loginPage.launchNewBrowserInstance();

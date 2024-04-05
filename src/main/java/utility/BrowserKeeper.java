@@ -23,7 +23,7 @@ public class BrowserKeeper {
    public BrowserKeeper(){
 	   
    }
-    @SuppressWarnings("deprecation")
+
     public void setupWebDriver() throws MalformedURLException {
        String username = System.getenv("BROWSERSTACK_USERNAME");
        String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
