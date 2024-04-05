@@ -4,7 +4,6 @@ import org.testng.Assert;
 import utility.BrowserKeeper;
 
 public class LoginPage extends BasePage{
-    BrowserKeeper browser = new BrowserKeeper();
     By emailAddress;
     By password;
     By signIn;
@@ -25,7 +24,7 @@ public class LoginPage extends BasePage{
         this.passwordError=By.xpath("//span[@class='text-danger']");
         this.emptyEmailError=By.id("login_error");
         this.emptyPasswordError=By.id("pass_error");
-        this.loginSuccessCheck=By.xpath("//span[@class='d-inline-block text-left mr-2']");
+        this.loginSuccessCheck=By.xpath("//small[normalize-space()='ShipPlug :: QA SERVER']");
     }
     public void setEmailAddress(String inputEmail){
     	this.getBrowser().findElement(emailAddress).sendKeys(inputEmail);

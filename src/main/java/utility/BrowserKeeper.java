@@ -23,7 +23,8 @@ public class BrowserKeeper {
    public BrowserKeeper(){
 	   
    }
-   public void setupWebDriver() throws MalformedURLException {
+    @SuppressWarnings("deprecation")
+    public void setupWebDriver() throws MalformedURLException {
        String username = System.getenv("BROWSERSTACK_USERNAME");
        String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
        MutableCapabilities capabilities = new MutableCapabilities();
@@ -33,6 +34,7 @@ public class BrowserKeeper {
        capabilities.setCapability("bstack:options", browserstackOptions);
        browser = new RemoteWebDriver(new URL("https://" + username + ":" + accessKey +
                "@hub.browserstack.com/wd/hub"), capabilities);
+
    }
    public  WebDriver getBrowserInstance() {
 	return browser;

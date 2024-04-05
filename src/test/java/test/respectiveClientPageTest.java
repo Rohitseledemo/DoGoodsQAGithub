@@ -38,6 +38,5 @@ public class respectiveClientPageTest {
         earningsPage.typeClientNameAndClickOnIt();
         respectiveClientEarningsPage rcep = new respectiveClientEarningsPage();
         Assert.assertEquals(rcep.verifyClientName(),earningsPage.clientName);
-        //rcep.
     }
 }

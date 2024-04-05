@@ -2,9 +2,9 @@ package pages;
 
 import org.openqa.selenium.By;
 
-public class ForgotPassword extends BasePage {
+public class ForgotPasswordPage extends BasePage {
     By emailForgot,returnToLogin,sendEmail,resetPasswordLink;
-    public ForgotPassword(){
+    public ForgotPasswordPage(){
         this.emailForgot= By.xpath("//input[@id='email_address']");
         this.returnToLogin=By.xpath("//a[@class='text-secondary text-decoration-none font-weight-bold fget']");
         this.sendEmail=By.xpath("//button[@type='submit']");

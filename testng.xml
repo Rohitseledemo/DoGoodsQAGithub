@@ -2,9 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
     <parameter name ="Email" value="admin@dogoodsinc.com"/>
-    <parameter name ="WrongEmail" value="admin!dogoodsinc.com"/>
     <parameter name="Password" value="Admin@Shipplug2024!"/>
-    <parameter name="WrongPassword" value="Admin!Shipplug2024!"/>
     <parameter name="URL" value="https://qa-admin.dogoodsinc.com/admin/"></parameter>
     <test verbose="2" preserve-order="true" name="DoGood-QA">
         <classes>
