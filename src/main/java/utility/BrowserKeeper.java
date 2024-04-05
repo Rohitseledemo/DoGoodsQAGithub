@@ -1,5 +1,6 @@
 package utility;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,7 +23,8 @@ public class BrowserKeeper {
    public BrowserKeeper(){
 	   
    }
-   public void setupWebDriver() throws MalformedURLException {
+    @SuppressWarnings("deprecation")
+    public void setupWebDriver() throws MalformedURLException {
        String username = System.getenv("BROWSERSTACK_USERNAME");
        String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
        MutableCapabilities capabilities = new MutableCapabilities();
@@ -32,8 +34,20 @@ public class BrowserKeeper {
        capabilities.setCapability("bstack:options", browserstackOptions);
        browser = new RemoteWebDriver(new URL("https://" + username + ":" + accessKey +
                "@hub.browserstack.com/wd/hub"), capabilities);
+
    }
    public  WebDriver getBrowserInstance() {
 	return browser;
+   }
+   public boolean waitForPresenceOfElement(int waitTime, By ele){
+       WebDriverWait wait = new WebDriverWait( browser,Duration.ofSeconds(waitTime));
+       boolean result = true;
+       try{
+       wait.until(ExpectedConditions.presenceOfElementLocated(ele));
+       }
+       catch (Exception e){
+           result = false;
+       }
+           return result;
    }
 }

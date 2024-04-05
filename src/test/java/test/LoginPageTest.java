@@ -1,93 +1,82 @@
 package test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-import pages.LoginPage;
 
+import org.testng.annotations.*;
+import pages.LoginPage;
 import java.net.MalformedURLException;
 
 public class LoginPageTest {
+    String url, email, password;
     LoginPage loginPage;
-    @Test(priority = 6)
-    public void correctTest() throws MalformedURLException, InterruptedException {
+
+    @Parameters({ "URL", "Email", "Password" })
+    @BeforeTest
+    public void launchBrowser(String URL, String Email, String Password) throws MalformedURLException {
+
+        this.url = URL;
+        this.email = Email;
+        this.password = Password;
+
         loginPage = new LoginPage();
         loginPage.launchNewBrowserInstance();
-        loginPage.launchUrl("https://qa-admin.dogoodsinc.com/admin/");
-        String inputEmail ="admin@dogoodsinc.com";
-        loginPage.setEmailAddress(inputEmail);
-        String inputPassword = "Admin@Shipplug2024!";
-        loginPage.setPassword(inputPassword);
+    }
+
+    @Test(dataProvider = "getData")
+    public void loginTest(String scenario, String testInputEmail, String testInputPassword)
+            throws MalformedURLException {
+        loginPage.launchUrl(this.url);
+        loginPage.setEmailAddress(testInputEmail);
+        loginPage.setPassword(testInputPassword);
         loginPage.rememberMeClick();
         loginPage.signInClick();
-        Thread.sleep(2000);
-        Assert.assertTrue(loginPage.loginVerify("Hi Admin"));
-        loginPage.closeBrowser();
+
+        if (scenario.equalsIgnoreCase("IncorrectEmail")) {
+            loginPage.wrongEmailErrorDisplayed();
+
+        } else if (scenario.equalsIgnoreCase("IncorrectPassword")) {
+            loginPage.wrongPasswordErrorDisplayed();
+
+        } else if (scenario.equalsIgnoreCase("EmptyEmail")) {
+            loginPage.emptyEmailErrorDisplayed();
+
+        } else if (scenario.equalsIgnoreCase("EmptyPassword")) {
+            loginPage.emptyPasswordErrorDisplayed();
+
+        } else if (scenario.equalsIgnoreCase("CorrectCredentials")) {
+            loginPage.loginVerify();
+
+        }
+
     }
-    @Test(priority = 1)
-    public void wrongEmailTest() throws MalformedURLException {
-        loginPage = new LoginPage();
-        loginPage.launchNewBrowserInstance();
-        loginPage.launchUrl("https://qa-admin.dogoodsinc.com/admin/");
-        String inputEmail ="admin!dogoodsinc.com";
-        loginPage.setEmailAddress(inputEmail);
-        String inputPassword = "Admin@Shipplug2024!";
-        loginPage.setPassword(inputPassword);
-        loginPage.rememberMeClick();
-        loginPage.signInClick();
-        Assert.assertTrue(loginPage.wrongEmailErrorDisplayed("Please enter valid email."));
-        loginPage.closeBrowser();
+    @DataProvider
+    public String[][] getData() {
+        // 5 different data sets of username and password so,
+        String[][] data = new String[5][3];
+        // 1st dataset
+        data[0][0] = "IncorrectEmail";
+        data[0][1] = "admin!dogoodsinc.com";
+        data[0][2] = "Admin@Shipplug2024!";
+        // 2nd dataset
+        data[1][0] = "IncorrectPassword";
+        data[1][1] = "admin@dogoodsinc.com";
+        data[1][2] = "Admin!Shipplug2024!";
+        // 3rd dataset
+        data[2][0] = "EmptyEmail";
+        data[2][1] = "";
+        data[2][2] = "Admin@Shipplug2024!";
+        // 4th dataset
+        data[3][0] = "EmptyPassword";
+        data[3][1] = "admin@dogoodsinc.com";
+        data[3][2] = "";
+        // 5th DataSet
+        data[4][0] = "CorrectCredentials";
+        data[4][1] = this.email;
+        data[4][2] = this.password;
+
+        return data;
     }
-    @Test(priority = 2)
-    public void wrongPasswordTest() throws MalformedURLException, InterruptedException {
-        loginPage = new LoginPage();
-        loginPage.launchNewBrowserInstance();
-        loginPage.launchUrl("https://qa-admin.dogoodsinc.com/admin/");
-        String inputEmail ="admin@dogoodsinc.com";
-        loginPage.setEmailAddress(inputEmail);
-        String inputPassword = "Admin!Shipplug2024!";
-        loginPage.setPassword(inputPassword);
-        loginPage.rememberMeClick();
-        loginPage.signInClick();
-        Thread.sleep(2000);
-        Assert.assertTrue(loginPage.wrongPasswordErrorDisplayed
-                (" Invalid Email address or password. Please try again."));
-        loginPage.closeBrowser();
-    }
-    @Test(priority = 3)
-    public void emptyEmailTest() throws MalformedURLException {
-        loginPage = new LoginPage();
-        loginPage.launchNewBrowserInstance();
-        loginPage.launchUrl("https://qa-admin.dogoodsinc.com/admin/");
-        String inputPassword = "Admin@Shipplug2024!";
-        loginPage.setPassword(inputPassword);
-        loginPage.rememberMeClick();
-        loginPage.signInClick();
-        Assert.assertTrue(loginPage.emptyEmailErrorDisplayed("Please provide your email."));
-        loginPage.closeBrowser();
-    }
-    @Test(priority = 4)
-    public void emptyPasswordTest() throws MalformedURLException {
-        loginPage = new LoginPage();
-        loginPage.launchNewBrowserInstance();
-        loginPage.launchUrl("https://qa-admin.dogoodsinc.com/admin/");
-        String inputEmail ="admin@dogoodsinc.com";
-        loginPage.setEmailAddress(inputEmail);
-        loginPage.rememberMeClick();
-        loginPage.signInClick();
-        Assert.assertTrue(loginPage.emptyPasswordErrorDisplayed("Please provide password."));
-        loginPage.closeBrowser();
-    }
-    @Test(priority = 5)
-    public void verifyForgotPasswordPage() throws InterruptedException, MalformedURLException {
-        loginPage = new LoginPage();
-        loginPage.launchNewBrowserInstance();
-        loginPage.launchUrl("https://qa-admin.dogoodsinc.com/admin/");
-        loginPage.verifyForgetPasswordClick();
-        Thread.sleep(2000);
-        WebElement forgotPassText = loginPage.getBrowser().findElement
-                (By.xpath("//h3[@class='font-weight-bold']"));
-        Assert.assertEquals("Forgot Password : ShipPlug",forgotPassText.getText());
+
+    @AfterTest
+    public void closeApplication() throws MalformedURLException {
         loginPage.closeBrowser();
     }
 

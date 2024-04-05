@@ -1,7 +1,7 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,8 +11,13 @@ import java.time.Duration;
 
 public class BasePage {
   public BrowserKeeper driver;
+  By email,pass,signInBtn;
   public BasePage(){
 	  driver = new BrowserKeeper();
+      this.email= By.xpath("//input[@id='email_addtess']");
+      this.pass= By.xpath("//input[@id='login_pass']");
+      this.signInBtn=By.xpath("//*[text()='Sign In']");
+
   }
   public  WebDriver getBrowser(){
     return this.driver.getBrowserInstance();
@@ -30,10 +35,7 @@ public class BasePage {
   public void launchUrl(String URL) {
       this.getBrowser().get(URL);
   }
-  public void waitForElementToAppear(WebElement elem){
-    WebDriverWait wait = new WebDriverWait(this.getBrowser(), Duration.ofSeconds(5));
-    wait.until(ExpectedConditions.visibilityOf(elem));
-  }
+
 
 }
   
