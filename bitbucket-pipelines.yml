@@ -1,14 +1,14 @@
-image: maven:3.3.9
+image: maven:3.6.3
 pipelines:
   branches:
     master:
-    - step:
-        name: Build and Test
-        caches:
-          - maven
-        script:
-          - mvn clean test
-          - mvn allure:report
-        artifacts:
-          - allure-results/**
-          - reports/**
+      - step:
+          name: Prod Regression
+          caches:
+            - maven
+          script:
+            - mvn clean test
+            - mvn allure:report
+          artifacts:
+            - allure-results/**
+            - reports/**
