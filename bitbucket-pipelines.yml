@@ -7,7 +7,7 @@ pipelines:
           caches:
             - maven
           script:
-            - mvn clean test -Pprod
+            - mvn clean test -Pprod -Denv=prod
             - mvn allure:report
           artifacts:
             - allure-results/**
