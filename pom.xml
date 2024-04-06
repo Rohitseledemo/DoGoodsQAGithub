@@ -117,7 +117,7 @@
 
     <profiles>
         <profile>
-            <id>prod</id>
+            <id>qa</id>
             <build>
                 <pluginManagement>
                     <plugins>
