@@ -117,7 +117,7 @@
 
     <profiles>
         <profile>
-            <id>Login</id>
+            <id>prod</id>
             <build>
                 <pluginManagement>
                     <plugins>
