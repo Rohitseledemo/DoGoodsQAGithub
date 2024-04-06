@@ -23,13 +23,25 @@
       <commons-io.version>2.6</commons-io.version>
       <poi-ooxml.version>3.9</poi-ooxml.version>
       <maven.compiler.target>1.8</maven.compiler.target>
-      <allure.version>2.13.8</allure.version>
+      <allure.version>2.24.0</allure.version>
       <allure-maven.version>2.10.0</allure-maven.version>
       <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
       <allure.cmd.download.url>
           https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
       </allure.cmd.download.url>
   </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-bom</artifactId>
+                <version>${allure.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
   <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
