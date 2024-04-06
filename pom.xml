@@ -20,6 +20,12 @@
       <testng.version>7.4.0</testng.version>
       <commons-io.version>2.6</commons-io.version>
       <poi-ooxml.version>3.9</poi-ooxml.version>
+      <allure.version>2.13.8</allure.version>
+      <allure-maven.version>2.10.0</allure-maven.version>
+      <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
+      <allure.cmd.download.url>
+          https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
+      </allure.cmd.download.url>
   </properties>
 
     <dependencies>
@@ -62,6 +68,24 @@
         <scope>compile</scope>
     </dependency>
 
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-attachments</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.automatedowl</groupId>
+            <artifactId>allure-environment-writer</artifactId>
+            <version>${allure-environment-writer.version}</version>
+        </dependency>
+
   </dependencies>
 
     <profiles>
@@ -80,6 +104,20 @@
                                 <suiteXmlFiles>
                                     <suiteXmlFile>testng.xml</suiteXmlFile>
                                 </suiteXmlFiles>
+                                <systemPropertyVariables>
+                                    <allure.results.directory>target/allure-results</allure.results.directory>
+                                </systemPropertyVariables>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>io.qameta.allure</groupId>
+                            <artifactId>allure-maven</artifactId>
+                            <version>${allure-maven.version}</version>
+                            <configuration>
+                                <reportVersion>${allure.version}</reportVersion>
+                                <allureDownloadUrl>
+                                    ${allure.cmd.download.url}/${allure.version}/allure-commandline-${allure.version}.zip
+                                </allureDownloadUrl>
                             </configuration>
                         </plugin>
                         <plugin>
