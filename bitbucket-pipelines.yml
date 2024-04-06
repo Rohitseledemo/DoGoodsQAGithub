@@ -3,9 +3,11 @@ pipelines:
   branches:
     master:
     - step:
+        name: Build and Test
+        caches:
+          - maven
         script:
-          - mvn clean
-          - mvn test # Your test runner command to run the tests
+          - mvn clean test
           - mvn allure:report
         artifacts:
           - allure-results/**
