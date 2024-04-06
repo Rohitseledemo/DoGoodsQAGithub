@@ -10,4 +10,5 @@ pipelines:
             - mvn clean test
             - mvn allure:report
           artifacts:
-            - target/**
+            - allure-results/**
+            - reports/**
