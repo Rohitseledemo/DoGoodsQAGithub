@@ -16,6 +16,7 @@
     <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
     <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
+      <aspectj.version>1.9.6</aspectj.version>
       <selenium.version>4.9.0</selenium.version>
       <selenium-server.version>4.9.0</selenium-server.version>
       <testng.version>7.4.0</testng.version>
@@ -112,10 +113,21 @@
                                 <suiteXmlFiles>
                                     <suiteXmlFile>testng.xml</suiteXmlFile>
                                 </suiteXmlFiles>
+                                <argLine>
+                                    -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                                    <!--							-javaagent:${com.browserstack:browserstack-java-sdk:jar}-->
+                                </argLine>
                                 <systemPropertyVariables>
                                     <allure.results.directory>target/allure-results</allure.results.directory>
                                 </systemPropertyVariables>
                             </configuration>
+                            <dependencies>
+                                <dependency>
+                                    <groupId>org.aspectj</groupId>
+                                    <artifactId>aspectjweaver</artifactId>
+                                    <version>${aspectj.version}</version>
+                                </dependency>
+                            </dependencies>
                         </plugin>
                         <plugin>
                             <groupId>io.qameta.allure</groupId>
