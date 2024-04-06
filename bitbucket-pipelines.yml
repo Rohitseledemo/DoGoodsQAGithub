@@ -9,7 +9,6 @@ pipelines:
           script:
             - mvn clean test
             - mvn allure:report
-            - cp -r xxx/target/* $BITBUCKET_CLONE_DIR/dist
           artifacts:
             - allure-results/**
             - '**/target/**'
