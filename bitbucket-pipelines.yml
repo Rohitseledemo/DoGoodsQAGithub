@@ -6,3 +6,7 @@ pipelines:
         script:
           - mvn clean
           - mvn test # Your test runner command to run the tests
+          - mvn allure:report
+        artifacts:
+          - allure-results/**
+          - reports/**
