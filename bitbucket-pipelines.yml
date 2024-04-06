@@ -11,4 +11,4 @@ pipelines:
             - mvn allure:report
           artifacts:
             - allure-results/**
-            - reports/**
+            - '**/target/**'
