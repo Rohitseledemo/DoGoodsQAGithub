@@ -140,6 +140,10 @@
                             <version>${maven-surefire-plugin.version}</version>
                             <configuration>
                                 <testFailureIgnore>true</testFailureIgnore>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <groups>${IncludeTag}</groups>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <excludedGroups>${ExcludeTag}</excludedGroups>
                                 <!-- Suite testng xml file to consider for test execution -->
                                 <suiteXmlFiles>
                                     <suiteXmlFile>testng.xml</suiteXmlFile>
