@@ -25,7 +25,7 @@ public class LoginPage extends BasePage{
         this.emptyEmailError=By.id("login_error");
         this.emptyPasswordError=By.id("pass_error");
         //this.loginSuccessCheck=By.xpath("//small[normalize-space()='ShipPlug :: QA SERVER']");
-        this.loginSuccessCheck=By.xpath("//div[@class='user_dropdown_wrap position-relative']");
+        this.loginSuccessCheck=By.xpath("//div[contains(@class, 'user_dropdown_wrap position-relative')]");
     }
     public void setEmailAddress(String inputEmail){
     	this.getBrowser().findElement(emailAddress).sendKeys(inputEmail);
