@@ -8,6 +8,6 @@ pipelines:
             - maven
           script:
             - mvn clean test
-            #- mvn allure:report
+            - mvn allure:report
           artifacts:
             - allure-results/**
