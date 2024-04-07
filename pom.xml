@@ -127,7 +127,12 @@
 
   </dependencies>
 
-
+  <profiles>
+     <profile>
+        <id>qa</id>
+        <activation>
+            <activeByDefault>true</activeByDefault>
+        </activation>
             <build>
                 <pluginManagement>
                     <plugins>
@@ -184,4 +189,6 @@
                     </plugins>
                 </pluginManagement>
             </build>
+     </profile>
+    </profiles>
 </project>
