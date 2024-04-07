@@ -8,7 +8,7 @@ pipelines:
             - maven
           script:
             - mvn clean test -Pqa -Denv=qa
-            - mvn allure:report
+            #- mvn allure:report
           artifacts:
             - allure-results/**
             - reports/**
