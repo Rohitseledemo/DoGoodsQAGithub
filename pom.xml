@@ -20,6 +20,7 @@
       <selenium.version>4.9.0</selenium.version>
       <selenium-server.version>4.9.0</selenium-server.version>
       <testng.version>7.4.0</testng.version>
+      <appium.java-client.version>7.0.0</appium.java-client.version>
       <junit4.version>4.13.1</junit4.version>
       <junit-jupiter>5.7.0</junit-jupiter>
       <assertj.version>3.19.0</assertj.version>
@@ -28,6 +29,7 @@
       <log4j.version>2.14.0</log4j.version>
       <maven.compiler.target>1.8</maven.compiler.target>
       <webdrivermanager.version>4.3.1</webdrivermanager.version>
+      <extent.version>4.0.6</extent.version>
       <allure.version>2.13.8</allure.version>
       <allure-maven.version>2.10.0</allure-maven.version>
       <allure-environment-writer.version>1.0.0</allure-environment-writer.version>
@@ -75,6 +77,16 @@
         <version>1.10.7</version>
         <scope>compile</scope>
     </dependency>
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>${extent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+            <version>${appium.java-client.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
