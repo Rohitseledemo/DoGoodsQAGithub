@@ -34,7 +34,6 @@ public class BrowserKeeper {
        capabilities.setCapability("bstack:options", browserstackOptions);
        browser = new RemoteWebDriver(new URL("https://" + username + ":" + accessKey +
                "@hub.browserstack.com/wd/hub"), capabilities);
-
    }
    public  WebDriver getBrowserInstance() {
 	return browser;
