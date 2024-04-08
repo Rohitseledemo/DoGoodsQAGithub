@@ -33,6 +33,7 @@ public class BasePage {
       this.getBrowser().quit();
   }
   public void launchUrl(String URL) {
+      this.driver.waitForPresenceOfElement(4,email);
       this.getBrowser().get(URL);
   }
 
