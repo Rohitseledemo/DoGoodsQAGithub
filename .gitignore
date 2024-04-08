@@ -50,6 +50,7 @@ Thumbs.db
 *.mov
 *.wmv
 #       //local browser instance-> copy it to setupWebDriver() of BrowserKeeper Class to run test locally
+
 #	    DesiredCapabilities caps=new DesiredCapabilities();
 #		ChromeOptions option=new ChromeOptions();
 #		option.addArguments("start-maximized");
