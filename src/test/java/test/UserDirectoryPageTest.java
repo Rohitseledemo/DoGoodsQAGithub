@@ -27,19 +27,20 @@ public class UserDirectoryPageTest {
         loginPage.launchNewBrowserInstance();
     }
     @Test(dataProvider = "getTestData")
-    public void accessTest(String testEmail, String testPassword){
+    public void AccessTest(String testEmail, String testPassword){
         loginPage.launchUrl(this.url);
         loginPage.setEmailAddress(testEmail);
         loginPage.setPassword(testPassword);
         loginPage.rememberMeClick();
         loginPage.signInClick();
         dashboardPage = new DashboardPage();
+        dashboardPage.searchDashboardMenuList();
         dashboardPage.clickOnCustomer();
-        customerPage=new CustomerPage();
-        customerPage.searchClientInList();
+        customerPage = new CustomerPage();
+        customerPage.searchCustomerClientInList();
         dashboardPage.clickOnEarnings();
-        earningsPage =  new EarningsPage();
-        earningsPage.searchClientsInList();
+        earningsPage = new EarningsPage();
+        earningsPage.searchEarningsClientsInList();
     }
     @DataProvider
     public String[][] getTestData() {
