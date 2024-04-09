@@ -19,21 +19,23 @@ public class CustomerPage extends BasePage {
         return this.getBrowser().findElements(compList);
     }
 
-    public void searchClientInList() {
+    public void searchCustomerClientInList() {
         List<String> names = new ArrayList<>();
         names.add("Activ Post");
         names.add("America Sunshine");
         boolean allValuesFound = true;
         for (String name : names) {
             boolean valueFound = false;
-            for (WebElement element : getAllNames()) {
-                String elementText = element.getText();
-                if (elementText.contains(name)){
-                    valueFound = true;
-                    break;
+            if (getAllNames().size() <= 2) {
+                for (WebElement element : getAllNames()) {
+                    String elementText = element.getText();
+                    if (elementText.contains(name)) {
+                        valueFound = true;
+                        break;
+                    }
                 }
             }
-            if (!valueFound) {
+            if (!valueFound || getAllNames().size()>2){
                 allValuesFound = false;
                 break;
             }
