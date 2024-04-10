@@ -52,7 +52,7 @@ public class EarningsPage extends BasePage {
         for (String name : names) {
             boolean valueFound = false;
             if (getAllClientsNames().size() <= 2) {
-                for (WebElement element : getAllClientsNames()){
+                for (WebElement element : getAllClientsNames()) {
                     String elementText = element.getText();
                     if (elementText.contains(name)){
                         valueFound = true;
@@ -62,7 +62,8 @@ public class EarningsPage extends BasePage {
             }
                 if (!valueFound || getAllClientsNames().size()>2) {
                     allValuesFound = false;
-                    break;}
+                    break;
+                }
             }
             Assert.assertTrue(allValuesFound);
         }
