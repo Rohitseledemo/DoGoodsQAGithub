@@ -14,8 +14,8 @@ public class UserInfoObject {
     public List<String> clientCheckBox;
 
 public UserInfoObject(){
-    this.menuCheckBox=setMenuValues();
-    this.clientCheckBox=setClientValues();
+//    this.menuCheckBox=setMenuValues();
+//    this.clientCheckBox=setClientValues();
 }
    public List<String> setMenuValues(){
     userInformationPage = new UserInformationPage();

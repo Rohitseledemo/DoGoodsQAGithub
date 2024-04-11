@@ -6,18 +6,20 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import userInputObjects.UserInfoObject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class UserInformationPage extends BasePage {
     UserInfoObject userInfoObject;
 
     JavascriptExecutor js;
-    RandomGenerator randomGenerator;
+    //RandomGenerator randomGenerator;
 
     By clientList;
     By menuList;
     By saveBtn;
+
+     Set<Integer> randomMenuIndex;
+     Set<Integer> randomClientIndex;
 
     public UserInformationPage() {
         this.clientList = By.xpath("//div[@class='col-sm-4']");
@@ -25,22 +27,39 @@ public class UserInformationPage extends BasePage {
         this.saveBtn = By.xpath("//button[@type='submit']");
     }
 
-    public List<Integer> getRandomMenuIndex() {
-        randomGenerator = new RandomGenerator();
-        return randomGenerator.generateRandomIndexes(2);
-    }
+//    public List<Integer> getRandomMenuIndex() {
+//        randomGenerator = new RandomGenerator();
+//        return randomGenerator.generateRandomIndexes(2);
+//    }
+//
+//    public List<Integer> getRandomClientIndex() {
+//        randomGenerator = new RandomGenerator();
+//        return randomGenerator.generateRandomIndexes(2);
+//    }
 
-    public List<Integer> getRandomClientIndex() {
-        randomGenerator = new RandomGenerator();
-        return randomGenerator.generateRandomIndexes(2);
-    }
+    //
+    public void getRandomIndexes(int menuCount, int clientCount) {
+        this.randomMenuIndex = new HashSet<>();
+        this.randomClientIndex = new HashSet<>();
+        Random random = new Random();
+        for(int i=0; i<menuCount; i++) {
+            this.randomMenuIndex.add(random.nextInt(15));
+        }
+        for(int i=0; i<clientCount; i++) {
+            this.randomClientIndex.add(random.nextInt(91));
+        }
+    }//tbd
 
     public List<String> randomMenuClick() {
         js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, 500);");
         List<WebElement> mnList = this.getBrowser().findElements(menuList);
         List<String> menuNames = new ArrayList<>();
-        for (int i = 0; i <= getRandomMenuIndex().size(); i++) {
+//        for (int i = 0; i <= getRandomMenuIndex().size(); i++) {
+//            mnList.get(i).click();
+//            menuNames.add(mnList.get(i).getText());
+//        }
+        for(Integer i : randomMenuIndex) {
             mnList.get(i).click();
             menuNames.add(mnList.get(i).getText());
         }
@@ -52,7 +71,11 @@ public class UserInformationPage extends BasePage {
         js.executeScript("window.scrollTo(0, 900);");
         List<WebElement> clList = this.getBrowser().findElements(clientList);
         List<String> clNames = new ArrayList<>();
-        for (int i = 0; i <= getRandomClientIndex().size(); i++) {
+//        for (int i = 0; i <= getRandomClientIndex().size(); i++) {
+//            clList.get(i).click();
+//            clNames.add(clList.get(i).getText());
+//        }
+        for(Integer i : randomClientIndex) {
             clList.get(i).click();
             clNames.add(clList.get(i).getText());
         }

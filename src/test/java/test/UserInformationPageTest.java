@@ -18,7 +18,7 @@ public class UserInformationPageTest {
 
     String url, email, password;
 
-    @BeforeTest
+    @BeforeMethod
     @Parameters({"Email","Password","URL"})
     public void launchBrowser(@Optional("admin@dogoodsinc.com") String email,
                               @Optional("Admin@Shipplug2024!")String password,
@@ -54,8 +54,6 @@ public class UserInformationPageTest {
         loginPage.setPassword(testPassword);
         loginPage.rememberMeClick();
         loginPage.signInClick();
-
-
     }
 
 
@@ -69,9 +67,9 @@ public class UserInformationPageTest {
         return data;
     }
 
-//    @AfterTest
-//    public void closeApplication() throws MalformedURLException {
-//        loginPage.closeBrowser();
-//    }
+    @AfterMethod
+    public void closeApplication() throws MalformedURLException {
+        loginPage.closeBrowser();
+    }
 
 }
