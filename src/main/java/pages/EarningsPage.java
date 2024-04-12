@@ -18,9 +18,8 @@ public class EarningsPage extends BasePage {
     public EarningsPage() {
         this.title = By.xpath("//h3[normalize-space()='Customer Listing']");
         this.clientNameClick = By.xpath("//td[normalize-space()='Digital Color Concepts']");
-        this.companyTextBox = By.xpath("//input[@placeholder='Company']");
-//      this.clientNameClick=this.getBrowser().findElement(By.xpath(("//td[normalize-space()='Digital Color Concepts']")));
-//      this.companyTextBox=this.getBrowser().findElement(By.xpath("//input[@placeholder='Company']"));
+        this.clientNameClick= By.xpath("//td[normalize-space()='Azazie']");
+        this.companyTextBox=By.xpath("//input[@placeholder='Company']");
     }
 
     public List<WebElement> getAllClientsNames() {
@@ -40,8 +39,11 @@ public class EarningsPage extends BasePage {
 
     public void typeClientNameAndClickOnIt() {
         Actions ac = new Actions(this.getBrowser());
-//        ac.moveToElement(companyTextBox).sendKeys(clientName, Keys.RETURN).perform();
-//        ac.click(clientNameClick);
+        WebElement companyTextBoxWebElement=this.getBrowser().findElement(companyTextBox);
+        String clientName = "Azazie";
+        ac.moveToElement(companyTextBoxWebElement).sendKeys(clientName, Keys.RETURN).perform();
+        this.driver.waitForPresenceOfElement(4,clientNameClick);
+        this.getBrowser().findElement(clientNameClick).click();
     }
 
     public void searchEarningsClientsInList() {
@@ -52,7 +54,7 @@ public class EarningsPage extends BasePage {
         for (String name : names) {
             boolean valueFound = false;
             if (getAllClientsNames().size() <= 2) {
-                for (WebElement element : getAllClientsNames()){
+                for (WebElement element : getAllClientsNames()) {
                     String elementText = element.getText();
                     if (elementText.contains(name)){
                         valueFound = true;
@@ -62,7 +64,8 @@ public class EarningsPage extends BasePage {
             }
                 if (!valueFound || getAllClientsNames().size()>2) {
                     allValuesFound = false;
-                    break;}
+                    break;
+                }
             }
             Assert.assertTrue(allValuesFound);
         }

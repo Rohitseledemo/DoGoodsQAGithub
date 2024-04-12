@@ -18,6 +18,7 @@ public class DashboardPage extends BasePage {
         this.sideMenuItemEarnings = By.xpath("//i[@class='fas fas fa-file-invoice-dollar']");
         this.getSideMenuCustomer = By.xpath("//i[@class='fas fa-user-tie']");
         this.menuItemList = By.xpath("//li[@class='nav-item nav-item-custom']");
+        this.sideMenuItemUserDirectory=By.xpath("//i[@class='fas fa-address-book']");
     }
 
     public void clickOnEarnings() {
@@ -26,6 +27,7 @@ public class DashboardPage extends BasePage {
     }
 
     public void clickOnUserDirectory() {
+        this.driver.waitForPresenceOfElement(4, sideMenuItemUserDirectory);
         this.getBrowser().findElement(sideMenuItemUserDirectory).click();
     }
 

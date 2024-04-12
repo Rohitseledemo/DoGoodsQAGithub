@@ -1,19 +1,17 @@
 package test;
 
 import org.testng.annotations.*;
-import pages.CustomerPage;
-import pages.DashboardPage;
-import pages.EarningsPage;
-import pages.LoginPage;
+import pages.*;
 
 import java.net.MalformedURLException;
 
-public class UserDirectoryPageTest {
+public class respectiveClientEarningsPageTest {
+    String url, email, password;
     LoginPage loginPage;
     DashboardPage dashboardPage;
-    CustomerPage customerPage;
     EarningsPage earningsPage;
-    String url, email, password;
+    RespectiveClientEarningsPage respectiveClientEarningsPage;
+
     @BeforeMethod
     @Parameters({"URL" })
     public void launchBrowser(@Optional("https://qa-admin.dogoodsinc.com/admin/")String Url)
@@ -27,26 +25,27 @@ public class UserDirectoryPageTest {
         loginPage.launchNewBrowserInstance();
     }
     @Test(dataProvider = "getTestData")
-    public void AccessTest(String testEmail, String testPassword){
+    public void monthlyEarningsTest(String testEmail, String testPassword){
         loginPage.launchUrl(this.url);
         loginPage.setEmailAddress(testEmail);
         loginPage.setPassword(testPassword);
         loginPage.rememberMeClick();
         loginPage.signInClick();
         dashboardPage = new DashboardPage();
-        dashboardPage.searchDashboardMenuList();
-        dashboardPage.clickOnCustomer();
-        customerPage = new CustomerPage();
-        customerPage.searchCustomerClientInList();
         dashboardPage.clickOnEarnings();
         earningsPage = new EarningsPage();
-        earningsPage.searchEarningsClientsInList();
+        earningsPage.typeClientNameAndClickOnIt();
+        respectiveClientEarningsPage = new RespectiveClientEarningsPage();
+        respectiveClientEarningsPage.compareValues();
+
+
     }
+
     @DataProvider
     public String[][] getTestData() {
         String[][] data = new String[1][2];
         // 1st dataset
-        data[0][0] = "test@dogoodsinc.com";
+        data[0][0] = "Testqa@dogoodsinc.com";
         data[0][1] = "Test@418";
         return data;
     }

@@ -8,7 +8,7 @@ public class LoginPageTest {
     String url, email, password;
     LoginPage loginPage;
 
-    @BeforeTest
+    @BeforeMethod
     @Parameters({"Email", "Password","URL" })
     public void launchBrowser(@Optional("admin@dogoodsinc.com") String email,
                               @Optional("Admin@Shipplug2024!")String password,
@@ -71,13 +71,13 @@ public class LoginPageTest {
         data[3][2] = "";
         // 5th DataSet
         data[4][0] = "CorrectCredentials";
-        data[4][1] = this.email;
-        data[4][2] = this.password;
+        data[4][1] = "admin@dogoodsinc.com";
+        data[4][2] = "Admin@Shipplug2024!";
 
         return data;
     }
 
-    @AfterTest
+    @AfterMethod
     public void closeApplication() throws MalformedURLException {
         loginPage.closeBrowser();
     }

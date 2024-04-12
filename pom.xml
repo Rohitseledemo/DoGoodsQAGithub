@@ -124,6 +124,11 @@
             <artifactId>allure-environment-writer</artifactId>
             <version>${allure-environment-writer.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.4</version>
+        </dependency>
 
   </dependencies>
 
@@ -149,7 +154,6 @@
                                 <!-- Suite testng xml file to consider for test execution -->
                                 <suiteXmlFiles>
                                     <suiteXmlFile>testng.xml</suiteXmlFile>
-                                    <suiteXmlFile>testng1.xml</suiteXmlFile>
                                 </suiteXmlFiles>
                                 <argLine>
                                     -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"

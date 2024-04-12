@@ -6,8 +6,9 @@
         <parameter name="Password" value="Admin@Shipplug2024!"/>
         <parameter name="URL" value="https://qa-admin.dogoodsinc.com/admin/"/>
         <classes>
-            <class name="test.LoginPageTest">
-            </class>
+            <class name="test.LoginPageTest"/>
+            <class name="test.respectiveClientEarningsPageTest"/>
+            <class name="test.UserDirectoryPageTest"/>
         </classes>
     </test>
 </suite>
