@@ -31,7 +31,7 @@ public class BrowserKeeper {
        option.addArguments("start-maximized");
        MutableCapabilities capabilities = new MutableCapabilities();
        capabilities.setCapability("browserName", "Chrome");
-       capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+       capabilities.setCapability(ChromeOptions.CAPABILITY, option);
        HashMap<String, String> browserstackOptions = new HashMap<String, String>();
        browserstackOptions.put("os", "Windows");
        capabilities.setCapability("bstack:options", browserstackOptions);
