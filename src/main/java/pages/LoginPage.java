@@ -24,7 +24,7 @@ public class LoginPage extends BasePage{
         this.passwordError=By.xpath("//span[@class='text-danger']");
         this.emptyEmailError=By.id("login_error");
         this.emptyPasswordError=By.id("pass_error");
-        this.loginSuccessCheck=By.xpath("//div[contains(@class, 'user_dropdown_wrap position-relative')]");
+        this.loginSuccessCheck=By.xpath("//div[@class='card-body']");
     }
     public void setEmailAddress(String inputEmail){
         this.driver.waitForPresenceOfElement(4,emailAddress);
@@ -61,6 +61,7 @@ public class LoginPage extends BasePage{
     }
     public void loginVerify(){
         this.driver.waitForPresenceOfElement(2,loginSuccessCheck);
+        this.getBrowser().findElement(loginSuccessCheck).click();
         Assert.assertTrue(this.getBrowser().findElement(loginSuccessCheck).isDisplayed());
     }
 

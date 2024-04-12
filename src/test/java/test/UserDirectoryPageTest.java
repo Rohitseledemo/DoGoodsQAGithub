@@ -14,7 +14,7 @@ public class UserDirectoryPageTest {
     CustomerPage customerPage;
     EarningsPage earningsPage;
     String url, email, password;
-    @BeforeTest
+    @BeforeMethod
     @Parameters({"URL" })
     public void launchBrowser(@Optional("https://qa-admin.dogoodsinc.com/admin/")String Url)
             throws MalformedURLException {
@@ -51,7 +51,7 @@ public class UserDirectoryPageTest {
         return data;
     }
 
-    @AfterTest
+    @AfterMethod
     public void closeApplication() throws MalformedURLException {
         loginPage.closeBrowser();
     }

@@ -71,8 +71,8 @@ public class LoginPageTest {
         data[3][2] = "";
         // 5th DataSet
         data[4][0] = "CorrectCredentials";
-        data[4][1] = this.email;
-        data[4][2] = this.password;
+        data[4][1] = "admin@dogoodsinc.com";
+        data[4][2] = "Admin@Shipplug2024!";
 
         return data;
     }
