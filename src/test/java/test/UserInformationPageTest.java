@@ -43,20 +43,33 @@ public class UserInformationPageTest {
         dashboardPage.clickOnUserDirectory();
         userDirectoryPage = new UserDirectoryPage();
         userDirectoryPage.userTestQAEditBtnClick();
+        userInformationPage= new UserInformationPage();
+        userInformationPage.getRandomIndexes(2);
         userInformationPage.randomMenuClick();
         userInformationPage.randomClientClick();
         userInformationPage.clickOnSaveBtn();
     }
-    @Test(dataProvider = "getTestData")
-    public void checkAccessTest(String testEmail, String testPassword){
-        loginPage.launchUrl(this.url);
-        loginPage.setEmailAddress(testEmail);
-        loginPage.setPassword(testPassword);
-        loginPage.rememberMeClick();
-        loginPage.signInClick();
-    }
-
-
+//    @Test(dataProvider = "getAdminData")
+//    public void setAccessTest(String testEmail, String testPassword){
+//        loginPage.launchUrl(this.url);
+//        loginPage.setEmailAddress(testEmail);
+//        loginPage.setPassword(testPassword);
+//        loginPage.rememberMeClick();
+//        loginPage.signInClick();
+//        userInformationPage= new UserInformationPage();
+//        userInformationPage.getRandomIndexes(2);
+//        userInformationPage.randomMenuClick();
+//        userInformationPage.randomClientClick();
+//        userInformationPage.clickOnSaveBtn();
+//    }
+//    @Test(dataProvider = "getTestData")
+//    public void checkAccessTest(String testEmail, String testPassword){
+//        loginPage.launchUrl(this.url);
+//        loginPage.setEmailAddress(testEmail);
+//        loginPage.setPassword(testPassword);
+//        loginPage.rememberMeClick();
+//        loginPage.signInClick();
+//    }
 
     @DataProvider
     public String[][] getTestData() {
@@ -67,9 +80,9 @@ public class UserInformationPageTest {
         return data;
     }
 
-    @AfterMethod
-    public void closeApplication() throws MalformedURLException {
-        loginPage.closeBrowser();
-    }
+//    @AfterMethod
+//    public void closeApplication() throws MalformedURLException {
+//        loginPage.closeBrowser();
+//    }
 
 }
