@@ -15,7 +15,7 @@ public class DashboardPage extends BasePage {
 
     public DashboardPage() {
         this.signOutBtn = By.xpath("//a[normalize-space()='Sign Out']");
-        this.sideMenuItemEarnings = By.xpath("//i[@class='fas fas fa-file-invoice-dollar']");
+        this.sideMenuItemEarnings = By.xpath("//p[normalize-space()='Earnings']");
         this.getSideMenuCustomer = By.xpath("//i[@class='fas fa-user-tie']");
         this.menuItemList = By.xpath("//li[@class='nav-item nav-item-custom']");
         this.sideMenuItemUserDirectory=By.xpath("//i[@class='fas fa-address-book']");

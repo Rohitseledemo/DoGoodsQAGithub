@@ -2,8 +2,10 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 
 public class UserDirectoryPage extends BasePage{
+    WebElement getEditBtn;
     JavascriptExecutor js;
     By yourProfile;
     By manageAccount;
@@ -31,8 +33,9 @@ public class UserDirectoryPage extends BasePage{
     }
     public void userTestQAEditBtnClick(){
         js = (JavascriptExecutor) this.getBrowser();
-        js.executeScript("window.scrollTo(0, 2500);");
+        js.executeScript("window.scrollTo(0, 900);");
         this.driver.waitForPresenceOfElement(4,userTestQAEditBtn);
-        this.getBrowser().findElement(userTestQAEditBtn).click();
+        getEditBtn = this.getBrowser().findElement(userTestQAEditBtn);
+        js.executeScript("arguments[0].click()", getEditBtn);
     }
 }

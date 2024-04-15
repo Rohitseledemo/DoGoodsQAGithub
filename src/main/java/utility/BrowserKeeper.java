@@ -38,6 +38,7 @@ public class BrowserKeeper {
        browser = new RemoteWebDriver(new URL("https://" + username + ":" + accessKey +
                "@hub.browserstack.com/wd/hub"), capabilities);
 
+
    }
    public  WebDriver getBrowserInstance() {
 	return browser;
@@ -52,5 +53,16 @@ public class BrowserKeeper {
            result = false;
        }
            return result;
+   }
+   public boolean waitForPresenceOfWebElement(int waitTime, WebElement ele){
+       WebDriverWait wait = new WebDriverWait(browser,Duration.ofSeconds(waitTime));
+       boolean result = true;
+       try{
+           wait.until(ExpectedConditions.visibilityOf(ele));
+       }
+       catch (Exception e){
+           result = false;
+       }
+       return result;
    }
 }
