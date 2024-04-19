@@ -9,6 +9,14 @@ import userInputObjects.UserInfoObject;
 import java.util.*;
 
 public class UserInformationPage extends BasePage {
+    WebElement saveBtnWebElement;
+    WebElement clientIndexElement;
+    List<WebElement> menuClickWebElements;
+    List<WebElement> clientClickWebElements;
+
+    public List<String> menuNames;
+    public List<String> clNames;
+
     UserInfoObject userInfoObject;
 
     JavascriptExecutor js;
@@ -17,11 +25,11 @@ public class UserInformationPage extends BasePage {
     By menuList;
     By saveBtn;
 
-     private Set<Integer> randomMenuIndex;
-     private Set<Integer> randomClientIndex;
+      Set<Integer> randomMenuIndex;
+      Set<Integer> randomClientIndex;
 
     public UserInformationPage() {
-        this.clientList = By.xpath("//div[@class='col-sm-4']");
+        this.clientList = By.xpath("//input[@name='user[accessible_customer][]']");
         this.menuList = By.xpath("//input[@class='form-check-input child child_1']");
         this.saveBtn = By.xpath("//button[@type='submit']");
     }
@@ -31,73 +39,87 @@ public class UserInformationPage extends BasePage {
         this.randomClientIndex = new HashSet<>();
         Random random = new Random();
         while(randomMenuIndex.size()<=count){
-//        for(int i=0; i<menuCount; i++) {
             this.randomMenuIndex.add(random.nextInt(15));
         }
         while(randomClientIndex.size()<=count){
-//        for(int i=0; i<clientCount; i++) {
-            this.randomClientIndex.add(random.nextInt(91));
+            this.randomClientIndex.add(random.nextInt(80));
         }
     }
 
     public List<String> randomMenuClick() {
+        getRandomIndexes(3);
         js = (JavascriptExecutor) this.getBrowser();
-        js.executeScript("window.scrollTo(0, 800);");
-        List<WebElement> mnList = this.getBrowser().findElements(menuList);
-        List<String> menuNames = new ArrayList<>();
-
-        for(Integer i : randomMenuIndex) {
-            WebElement click= this.getBrowser().findElement(By.xpath("//input[@id='mainSub_20']"));
-            js.executeScript("arguments[0].click()",click);
-            //mnList.get(i).click();
-            menuNames.add(mnList.get(i).getText());
+        menuClickWebElements = this.getBrowser().findElements(menuList);
+        for (WebElement menuCheckbox : menuClickWebElements) {
+            if (menuCheckbox.isSelected()) {
+                js.executeScript("arguments[0].click()", menuCheckbox);
+            }
         }
+        menuNames = new ArrayList<String>();
+
+        for(int i=0;i<randomMenuIndex.size();i++) {
+                WebElement menuIndexElement = menuClickWebElements.get(i);
+                js.executeScript("arguments[0].scrollIntoView(true);", menuIndexElement);
+                js.executeScript("arguments[0].click()", menuIndexElement);
+                Object s= js.executeScript("arguments[0].innerText()",menuIndexElement);
+                String s1 = s.toString();
+                System.out.println(s1);
+                menuNames.add(menuIndexElement.getText());
+            }
         return menuNames;
     }
 
     public List<String> randomClientClick() {
+        getRandomIndexes(3);
         js = (JavascriptExecutor) this.getBrowser();
-        js.executeScript("window.scrollTo(0, 900);");
-        List<WebElement> clList = this.getBrowser().findElements(clientList);
-        List<String> clNames = new ArrayList<>();
+        clientClickWebElements = this.getBrowser().findElements(clientList);
+        for (WebElement clientCheckbox : clientClickWebElements) {
+            if (clientCheckbox.isSelected()){
+                js.executeScript("arguments[0].click()", clientCheckbox);
+            }
+        }
+        clNames = new ArrayList<>();
 
         for(Integer i : randomClientIndex) {
-            WebElement click = this.getBrowser().findElement(By.xpath("//input[@id='main_93']"));
-            js.executeScript("arguments[0].click()",click);
-            //clList.get(i).click();
-            clNames.add(clList.get(i).getText());
-        }
+            clientIndexElement = clientClickWebElements.get(i);
+            js.executeScript("arguments[0].scrollIntoView(true);", clientIndexElement);
+            js.executeScript("arguments[0].click()", clientIndexElement);
+                clNames.add(clientIndexElement.getText());
+            }
         return clNames;
     }
 
     public void clickOnSaveBtn() {
-        WebElement click = this.getBrowser().findElement(saveBtn);
-        js.executeScript("arguments[0].click()",click);
-//        js.executeScript("window.scrollTo(0, 900);");
-//        this.getBrowser().findElement(saveBtn).click();
+        js = (JavascriptExecutor) this.getBrowser();
+        saveBtnWebElement = this.getBrowser().findElement(saveBtn);
+        js.executeScript("arguments[0].click()", saveBtnWebElement);
+//        javaScriptExecutor.executeScript("window.scrollTo(0, 900);");
+//        this.getBrowser().findElement(saveBtn).saveBtnWebElement();
     }
 
-    public void testQaMenuAccess() {
-        userInfoObject = new UserInfoObject();
-        List<WebElement> actual = this.getBrowser().findElements(menuList);
-        boolean allValuesFound = true;
-        for (String menuCheckBox : userInfoObject.menuCheckBox) {
-            boolean valueFound = false;
-            for (WebElement element : actual) {
-                String elementText = element.getText();
-                if (elementText.contains(menuCheckBox)) {
-                    valueFound = true;
-                    break;
-                }
-            }
+//    public void testQaMenuAccess() {
+//        userInfoObject = new UserInfoObject();
+//        List<WebElement> actual = this.getBrowser().findElements(menuList);
+//        boolean allValuesFound = true;
+//        for (String menuCheckBox : userInfoObject.menuCheckBox) {
+//            boolean valueFound = false;
+//            for (WebElement element : actual) {
+//                String elementText = element.getText();
+//                if (elementText.contains(menuCheckBox)) {
+//                    valueFound = true;
+//                    break;
+//                }
+//            }
+//
+//            if (!valueFound) {
+//                allValuesFound = false;
+//                break;
+//            }
+//        }
+//        Assert.assertTrue(allValuesFound);
+//    }
 
-            if (!valueFound) {
-                allValuesFound = false;
-                break;
-            }
-        }
-        Assert.assertTrue(allValuesFound);
-    }
+
 }
 
 

@@ -13,12 +13,13 @@ import java.util.Optional;
 public class EarningsPage extends BasePage {
     By title;
     By clientNameClick;
+    By testClientName;
     By companyTextBox;
 
     public EarningsPage() {
         this.title = By.xpath("//h3[normalize-space()='Customer Listing']");
-        this.clientNameClick = By.xpath("//td[normalize-space()='Digital Color Concepts']");
         this.clientNameClick= By.xpath("//td[normalize-space()='Azazie']");
+        this.testClientName= By.xpath("//td[normalize-space()='Selenium Testing']");
         this.companyTextBox=By.xpath("//input[@placeholder='Company']");
     }
 
@@ -40,10 +41,18 @@ public class EarningsPage extends BasePage {
     public void typeClientNameAndClickOnIt() {
         Actions ac = new Actions(this.getBrowser());
         WebElement companyTextBoxWebElement=this.getBrowser().findElement(companyTextBox);
-        String clientName = "Azazie";
+        String clientName = "sel";
         ac.moveToElement(companyTextBoxWebElement).sendKeys(clientName, Keys.RETURN).perform();
         this.driver.waitForPresenceOfElement(4,clientNameClick);
-        this.getBrowser().findElement(clientNameClick).click();
+        jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(clientNameClick));
+    }
+    public void typeClientNameAndClickOnIt2() {
+        Actions ac = new Actions(this.getBrowser());
+        WebElement companyTextBoxWebElement=this.getBrowser().findElement(companyTextBox);
+        String clientName = "sel";
+        ac.moveToElement(companyTextBoxWebElement).sendKeys(clientName, Keys.RETURN).perform();
+        this.driver.waitForPresenceOfElement(4,testClientName);
+        jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(testClientName));
     }
 
     public void searchEarningsClientsInList() {

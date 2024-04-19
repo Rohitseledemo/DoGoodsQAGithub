@@ -39,6 +39,7 @@ public class BrowserKeeper {
                "@hub.browserstack.com/wd/hub"), capabilities);
 
 
+
    }
    public  WebDriver getBrowserInstance() {
 	return browser;
