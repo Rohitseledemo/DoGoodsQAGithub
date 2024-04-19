@@ -9,6 +9,7 @@
             <class name="test.LoginPageTest"/>
             <class name="test.RespectiveClientEarningsPageTest"/>
             <class name="test.UserDirectoryPageTest"/>
+<!--            <class name="test.UserInformationPageTest"/>-->
         </classes>
     </test>
 </suite>

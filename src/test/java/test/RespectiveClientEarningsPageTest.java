@@ -13,8 +13,10 @@ public class RespectiveClientEarningsPageTest {
     RespectiveClientEarningsPage respectiveClientEarningsPage;
 
     @BeforeMethod
-    @Parameters({"URL" })
-    public void launchBrowser(@Optional("https://qa-admin.dogoodsinc.com/admin/")String Url)
+    @Parameters({"Email","Password","URL" })
+    public void launchBrowser(@Optional("admin@dogoodsinc.com") String email,
+                              @Optional("Admin@Shipplug2024!")String password,
+                              @Optional("https://qa-admin.dogoodsinc.com/admin/")String Url)
             throws MalformedURLException {
 
         this.url = Url;
@@ -38,6 +40,7 @@ public class RespectiveClientEarningsPageTest {
         respectiveClientEarningsPage = new RespectiveClientEarningsPage();
         respectiveClientEarningsPage.compareDates();
         respectiveClientEarningsPage.totalSavingsCalculate();
+        respectiveClientEarningsPage.viewDetailsBtnVerify();
     }
     @Test(dataProvider = "getTestData")
     public void accountValidation(String testEmail, String testPassword){
@@ -69,6 +72,39 @@ public class RespectiveClientEarningsPageTest {
         respectiveClientEarningsPage.clickOnEarningsIcon();
         respectiveClientEarningsPage.changeMonthAndValidateTotalSavings();
     }
+   // @Test
+    public void groundEntriesCountTest(){
+          loginPage.launchUrl(this.url);
+        loginPage.setEmailAddress(this.email);
+        loginPage.setPassword(this.password);
+        loginPage.rememberMeClick();
+        loginPage.signInClick();
+        dashboardPage = new DashboardPage();
+        dashboardPage.clickOnEarnings();
+        earningsPage = new EarningsPage();
+        earningsPage.typeClientNameAndClickOnIt2();
+        respectiveClientEarningsPage = new RespectiveClientEarningsPage();
+        respectiveClientEarningsPage.clickOnEarningsIcon();
+        respectiveClientEarningsPage.averageSavingsPkgDataCardClick();
+        System.out.println(respectiveClientEarningsPage.groundEntriesCount());
+    }
+//    @Test
+    public void generateEarningsBtnTest(){
+        loginPage.launchUrl(this.url);
+        loginPage.setEmailAddress(this.email);
+        loginPage.setPassword(this.password);
+        loginPage.rememberMeClick();
+        loginPage.signInClick();
+        dashboardPage = new DashboardPage();
+        dashboardPage.clickOnEarnings();
+        earningsPage = new EarningsPage();
+        earningsPage.typeClientNameAndClickOnIt2();
+        respectiveClientEarningsPage = new RespectiveClientEarningsPage();
+        respectiveClientEarningsPage.generateEarningsValidate(1);
+        respectiveClientEarningsPage.generateEarningsValidate(2);
+        respectiveClientEarningsPage.generateEarningsValidate(3);
+        respectiveClientEarningsPage.generateEarningsValidate(4);
+    }
 
     @DataProvider
     public String[][] getTestData() {
@@ -83,4 +119,5 @@ public class RespectiveClientEarningsPageTest {
     public void closeApplication() throws MalformedURLException {
         loginPage.closeBrowser();
     }
+
 }

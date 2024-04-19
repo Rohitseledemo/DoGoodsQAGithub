@@ -9,21 +9,18 @@ import java.util.List;
 public class UserInfoObject {
     UserInformationPage userInformationPage;
 
-    String email,password,confirmPassword, userType, activeStatus;
-    public List<String>  menuCheckBox;
+    public List<String> menuCheckBox;
     public List<String> clientCheckBox;
 
-public UserInfoObject(){
-//    this.menuCheckBox=setMenuValues();
-//    this.clientCheckBox=setClientValues();
-}
+
    public List<String> setMenuValues(){
-    userInformationPage = new UserInformationPage();
-    return userInformationPage.randomMenuClick();
+        userInformationPage = new UserInformationPage();
+        return this.menuCheckBox = userInformationPage.randomMenuClick();
 }
 
     public List<String> setClientValues(){
-    return userInformationPage.randomClientClick();
+        userInformationPage = new UserInformationPage();
+        return this.clientCheckBox = userInformationPage.randomClientClick();
    }
 
 }

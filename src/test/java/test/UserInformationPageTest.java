@@ -15,6 +15,7 @@ public class UserInformationPageTest {
     DashboardPage dashboardPage;
     UserDirectoryPage userDirectoryPage;
     UserInformationPage userInformationPage;
+    UserInfoObject userInfoObject;
 
     String url, email, password;
 
@@ -32,8 +33,8 @@ public class UserInformationPageTest {
         loginPage = new LoginPage();
         loginPage.launchNewBrowserInstance();
     }
-   @Test
-   public void setAccessTest(){
+   @Test(dataProvider = "getTestData")
+   public void setAccessTest(String testEmail, String testPassword){
         loginPage.launchUrl(this.url);
         loginPage.setEmailAddress(this.email);
         loginPage.setPassword(this.password);
@@ -42,40 +43,30 @@ public class UserInformationPageTest {
         dashboardPage = new DashboardPage();
         dashboardPage.clickOnUserDirectory();
         userDirectoryPage = new UserDirectoryPage();
-        userDirectoryPage.userTestQAEditBtnClick();
-        userInformationPage= new UserInformationPage();
-        userInformationPage.getRandomIndexes(2);
+        userDirectoryPage.userTestEditBtnClick();
+        userInfoObject= new UserInfoObject();
+        userInformationPage = new UserInformationPage();
         userInformationPage.randomMenuClick();
         userInformationPage.randomClientClick();
         userInformationPage.clickOnSaveBtn();
+        userDirectoryPage.logoutToLandingPage();
+
+        loginPage.setEmailAddress(testEmail);
+        loginPage.setPassword(testPassword);
+        loginPage.rememberMeClick();
+        loginPage.signInClick();
+
+        dashboardPage.checkDashboardMenuList(userInformationPage.menuNames);
+
+
     }
-//    @Test(dataProvider = "getAdminData")
-//    public void setAccessTest(String testEmail, String testPassword){
-//        loginPage.launchUrl(this.url);
-//        loginPage.setEmailAddress(testEmail);
-//        loginPage.setPassword(testPassword);
-//        loginPage.rememberMeClick();
-//        loginPage.signInClick();
-//        userInformationPage= new UserInformationPage();
-//        userInformationPage.getRandomIndexes(2);
-//        userInformationPage.randomMenuClick();
-//        userInformationPage.randomClientClick();
-//        userInformationPage.clickOnSaveBtn();
-//    }
-//    @Test(dataProvider = "getTestData")
-//    public void checkAccessTest(String testEmail, String testPassword){
-//        loginPage.launchUrl(this.url);
-//        loginPage.setEmailAddress(testEmail);
-//        loginPage.setPassword(testPassword);
-//        loginPage.rememberMeClick();
-//        loginPage.signInClick();
-//    }
+
 
     @DataProvider
     public String[][] getTestData() {
         String[][] data = new String[1][2];
         // 1st dataset
-        data[0][0] = "Testqa@dogoodsinc.com";
+        data[0][0] = "rohitqa@dogoodsinc.com";
         data[0][1] = "Test@418";
         return data;
     }

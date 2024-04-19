@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardPage extends BasePage {
+    List<WebElement> menuItemListWebElements;
     By signOutBtn;
     By sideMenuItemEarnings;
     By sideMenuItemUserDirectory;
@@ -53,7 +54,8 @@ public class DashboardPage extends BasePage {
                     String elementText = element.getText();
                     if (elementText.equalsIgnoreCase(name)){
                         valueFound = true;
-                        break;}
+                        break;
+                    }
                 }
             }
             if (!valueFound || getAllMenuItemNames().size()>2){
@@ -62,5 +64,23 @@ public class DashboardPage extends BasePage {
         }
         Assert.assertTrue(allValuesFound);
         }
+
+
+        public void checkDashboardMenuList(List<String> menuList) {
+            boolean allValuesFound = true;
+            menuItemListWebElements = this.getBrowser().findElements(menuItemList);
+            if (menuItemListWebElements.size() != menuList.size()) {
+                allValuesFound = false;
+            }
+                for (int i=0;i<menuItemListWebElements.size();i++) {
+                    String elementText = menuItemListWebElements.get(i).getText();
+                    String menuListText = menuList.get(i);
+                    if (!elementText.equals(menuListText)) {
+                        allValuesFound = false;
+                    }
+                }
+                Assert.assertTrue(allValuesFound);
+        }
+
     }
 

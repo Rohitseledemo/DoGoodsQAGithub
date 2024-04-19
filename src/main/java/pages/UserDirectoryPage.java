@@ -11,31 +11,34 @@ public class UserDirectoryPage extends BasePage{
     By manageAccount;
     By logOut;
     By addNew;
-    By userTestQAEditBtn;
+    By userTestEditBtn;
     public UserDirectoryPage(){
         this.yourProfile=By.xpath("//a[@title='Your profile']");
         this.manageAccount=By.xpath("//a[@class='px-4 py-3 border-bottom']");
         this.logOut=By.xpath("//a[@class='px-4 py-3']");
         this.addNew=By.id("addcustomerbutton");
-        this.userTestQAEditBtn=By.xpath("//tbody/tr[25]/td[4]/a[1]/i[1]");
+        this.userTestEditBtn=By.xpath("//tbody/tr[19]/td[4]/a[1]/i[1]");
     }
     public void clickOnYourProfile(){
         this.getBrowser().findElement(yourProfile).click();
     }
     public void clickOnManageAccount(){
+        this.getBrowser().findElement(yourProfile).click();
         this.getBrowser().findElement(manageAccount).click();
-    }
-    public void clickOnLogOut(){
-        this.getBrowser().findElement(logOut).click();
     }
     public void clickOnAddNew(){
         this.getBrowser().findElement(addNew).click();
     }
-    public void userTestQAEditBtnClick(){
+    public void userTestEditBtnClick(){
         js = (JavascriptExecutor) this.getBrowser();
         js.executeScript("window.scrollTo(0, 900);");
-        this.driver.waitForPresenceOfElement(4,userTestQAEditBtn);
-        getEditBtn = this.getBrowser().findElement(userTestQAEditBtn);
+        this.driver.waitForPresenceOfElement(4,userTestEditBtn);
+        getEditBtn = this.getBrowser().findElement(userTestEditBtn);
         js.executeScript("arguments[0].click()", getEditBtn);
+    }
+    public void logoutToLandingPage(){
+        this.getBrowser().findElement(yourProfile).click();
+        this.driver.waitForPresenceOfElement(2,logOut);
+        this.getBrowser().findElement(logOut).click();
     }
 }
