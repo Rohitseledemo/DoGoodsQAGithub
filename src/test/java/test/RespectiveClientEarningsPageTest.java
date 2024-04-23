@@ -101,7 +101,9 @@ public class RespectiveClientEarningsPageTest {
         respectiveClientEarningsPage = new RespectiveClientEarningsPage();
         respectiveClientEarningsPage.clickOnEarningsIcon();
         respectiveClientEarningsPage.averageSavingsPkgDataCardClick();
-        respectiveClientEarningsPage.groundEntriesCount();
+//        Assert.assertEquals(respectiveClientEarningsPage.getService_GroundCount()
+//                ,respectiveClientEarningsPage.groundEntriesCount());
+//        respectiveClientEarningsPage.groundEntriesCount();
     }
     @Test(dataProvider = "getDatePickerData")
     public void generateEarningsBtnTest(String scenario, String dateValue, String yearValue){
@@ -113,7 +115,7 @@ public class RespectiveClientEarningsPageTest {
         dashboardPage = new DashboardPage();
         dashboardPage.clickOnEarnings();
         earningsPage = new EarningsPage();
-        earningsPage.typeClientNameAndClickOnIt("Activ Post");
+        earningsPage.typeClientNameAndClickOnIt("Sel");
         respectiveClientEarningsPage = new RespectiveClientEarningsPage();
         respectiveClientEarningsPage.generateEarningsBtnClick();
         respectiveClientEarningsPage.datePickerHandler(dateValue,yearValue);
@@ -155,9 +157,9 @@ public class RespectiveClientEarningsPageTest {
         return data;
     }
 
-//    @AfterMethod
-//    public void closeApplication() throws MalformedURLException {
-//        loginPage.closeBrowser();
-//    }
+    @AfterMethod
+    public void closeApplication() throws MalformedURLException {
+        loginPage.closeBrowser();
+    }
 
 }
