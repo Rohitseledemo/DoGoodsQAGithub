@@ -61,11 +61,11 @@ public class RespectiveClientEarningsPage extends BasePage{
         this.avgSavingsPerPkgBtn=By.cssSelector("div[id='package_cost_savings'] h6");
         this.dataValueGroundBtn=By.xpath("//a[@data-val='Ground']");
         this.dataValueFedExReturnBtn=By.xpath("//a[@data-val='FedEx Returns']");
-        this.pageNavigationBtns =By.xpath("//div[@id='surcharge_package_pagination_section'] //ul//li");
+        this.pageNavigationBtns =By.xpath("//nav[@aria-label='Page navigation']//li//a");
         this.rateNegotiationBtn=By.xpath("//a[@data-bs-target='#ratenagotiation']");
         this.rateNegotiationAgreedDatePicker=By.id("agreedatepicker");
         this.viewDetailsBtn=By.id("viewDetails");
-        this.showEntriesBtn=By.xpath("//select[@name='earnings_list_length']");
+        this.showEntriesBtn=By.xpath("//select[@name='earnings_list_length']");//select[@name='earnings_list_length']
         this.downloadViewBtn=By.xpath("//button[@fdprocessedid='yfhjon']");
         this.lastCountOfInvoice=By.xpath("(//tbody//tr)[last()][1]");
         this.allServicesNames=By.xpath("//table[@id='avgerning']//tbody//tr//td[1]");
@@ -80,10 +80,10 @@ public class RespectiveClientEarningsPage extends BasePage{
     public void rateNegotiationDateParser(){
 
     }
-    public void viewDetailsBtnVerify(){
+    public boolean viewDetailsBtnVerify(){
         jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(viewDetailsBtn));
-        this.driver.waitForPresenceOfElement(6,showEntriesBtn);
-        Assert.assertTrue(this.getBrowser().findElement(showEntriesBtn).isDisplayed());
+        this.driver.waitForPresenceOfElement(4,showEntriesBtn);
+        return this.getBrowser().findElement(showEntriesBtn).isDisplayed();
     }
 
     public void pageNavigation(int pageNumber){

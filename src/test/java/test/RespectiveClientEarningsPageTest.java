@@ -37,11 +37,11 @@ public class RespectiveClientEarningsPageTest {
         dashboardPage = new DashboardPage();
         dashboardPage.clickOnEarnings();
         earningsPage = new EarningsPage();
-        earningsPage.typeClientNameAndClickOnIt("Azazie");
+        earningsPage.typeClientNameAndClickOnIt("Activ");
         respectiveClientEarningsPage = new RespectiveClientEarningsPage();
         respectiveClientEarningsPage.compareDates();
         respectiveClientEarningsPage.totalSavingsCalculate();
-        respectiveClientEarningsPage.viewDetailsBtnVerify();
+        Assert.assertTrue(respectiveClientEarningsPage.viewDetailsBtnVerify());
     }
     @Test
     public void accountValidation(){
