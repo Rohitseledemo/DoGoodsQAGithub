@@ -43,26 +43,26 @@ public class LoginPage extends BasePage{
         this.driver.waitForPresenceOfElement(2,forgetPassword);
         this.getBrowser().findElement(forgetPassword).click();
     }
-    public void wrongEmailErrorDisplayed(){
+    public boolean wrongEmailErrorDisplayed(){
         this.driver.waitForPresenceOfElement(2,loginSuccessCheck);
-        Assert.assertTrue(this.getBrowser().findElement(emailError).isDisplayed());
+        return this.getBrowser().findElement(emailError).isDisplayed();
     }
-    public void wrongPasswordErrorDisplayed(){
+    public boolean wrongPasswordErrorDisplayed(){
         this.driver.waitForPresenceOfElement(2,passwordError);
-        Assert.assertTrue(this.getBrowser().findElement(passwordError).isDisplayed());
+        return this.getBrowser().findElement(passwordError).isDisplayed();
     }
-    public void emptyPasswordErrorDisplayed(){
+    public boolean emptyPasswordErrorDisplayed(){
         this.driver.waitForPresenceOfElement(2,emptyPasswordError);
-        Assert.assertTrue(this.getBrowser().findElement(emptyPasswordError).isDisplayed());
+        return this.getBrowser().findElement(emptyPasswordError).isDisplayed();
     }
-    public void emptyEmailErrorDisplayed(){
+    public boolean emptyEmailErrorDisplayed(){
         this.driver.waitForPresenceOfElement(2,emptyEmailError);
-        Assert.assertTrue(this.getBrowser().findElement(emptyEmailError).isDisplayed());
+        return this.getBrowser().findElement(emptyEmailError).isDisplayed();
     }
-    public void loginVerify(){
+    public boolean loginVerify(){
         this.driver.waitForPresenceOfElement(2,loginSuccessCheck);
         this.getBrowser().findElement(loginSuccessCheck).click();
-        Assert.assertTrue(this.getBrowser().findElement(loginSuccessCheck).isDisplayed());
+        return this.getBrowser().findElement(loginSuccessCheck).isDisplayed();
     }
 
 
