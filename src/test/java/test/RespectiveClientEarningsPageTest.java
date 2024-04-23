@@ -41,6 +41,20 @@ public class RespectiveClientEarningsPageTest {
         respectiveClientEarningsPage = new RespectiveClientEarningsPage();
         respectiveClientEarningsPage.compareDates();
         respectiveClientEarningsPage.totalSavingsCalculate();
+    }
+    @Test
+    public void viewDetailsBtnValidation(){
+        loginPage.launchUrl(this.url);
+        loginPage.setEmailAddress(this.email);
+        loginPage.setPassword(this.password);
+        loginPage.rememberMeClick();
+        loginPage.signInClick();
+        dashboardPage = new DashboardPage();
+        dashboardPage.clickOnEarnings();
+        earningsPage = new EarningsPage();
+        earningsPage.typeClientNameAndClickOnIt("Activ");
+        respectiveClientEarningsPage = new RespectiveClientEarningsPage();
+        respectiveClientEarningsPage.clickOnEarningsIcon(0);
         Assert.assertTrue(respectiveClientEarningsPage.viewDetailsBtnVerify());
     }
     @Test
@@ -87,9 +101,7 @@ public class RespectiveClientEarningsPageTest {
         respectiveClientEarningsPage = new RespectiveClientEarningsPage();
         respectiveClientEarningsPage.clickOnEarningsIcon();
         respectiveClientEarningsPage.averageSavingsPkgDataCardClick();
-//        System.out.println(respectiveClientEarningsPage.getService_GroundCount());
-//        System.out.println(respectiveClientEarningsPage.getService_FedExReturnsCount());
-        //respectiveClientEarningsPage.groundEntriesCount();
+        respectiveClientEarningsPage.groundEntriesCount();
     }
     @Test(dataProvider = "getDatePickerData")
     public void generateEarningsBtnTest(String scenario, String dateValue, String yearValue){
