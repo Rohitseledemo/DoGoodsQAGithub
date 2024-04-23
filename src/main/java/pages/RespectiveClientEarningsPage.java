@@ -65,9 +65,9 @@ public class RespectiveClientEarningsPage extends BasePage{
         this.rateNegotiationBtn=By.xpath("//a[@data-bs-target='#ratenagotiation']");
         this.rateNegotiationAgreedDatePicker=By.id("agreedatepicker");
         this.viewDetailsBtn=By.id("viewDetails");
-        this.showEntriesBtn=By.xpath("//select[@name='earnings_list_length']");//select[@name='earnings_list_length']
+        this.showEntriesBtn=By.xpath("//select[@name='earnings_list_length']");
         this.downloadViewBtn=By.xpath("//button[@fdprocessedid='yfhjon']");
-        this.lastCountOfInvoice=By.xpath("(//tbody//tr)[last()][1]");
+        this.lastCountOfInvoice=By.xpath("//tbody//tr// td[@valign='top'][1]");
         this.allServicesNames=By.xpath("//table[@id='avgerning']//tbody//tr//td[1]");
         this.allServicesCount=By.xpath("//table[@id='avgerning']//tbody//tr//td[2]");
     }
@@ -81,8 +81,10 @@ public class RespectiveClientEarningsPage extends BasePage{
 
     }
     public boolean viewDetailsBtnVerify(){
-        jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(viewDetailsBtn));
-        this.driver.waitForPresenceOfElement(4,showEntriesBtn);
+        WebElement viewDetailsBtnElement = this.getBrowser().findElement(viewDetailsBtn);
+        this.driver.waitForVisibilityOfWebElement(4,viewDetailsBtnElement);
+        jsExecutor.executeScript("arguments[0].click()",viewDetailsBtnElement);
+        this.driver.waitForPresenceOfElement(10,showEntriesBtn);
         return this.getBrowser().findElement(showEntriesBtn).isDisplayed();
     }
 
@@ -97,14 +99,13 @@ public class RespectiveClientEarningsPage extends BasePage{
         List<WebElement> lastBtnWebElement = this.getBrowser().findElements(pageNavigationBtns);
         int indexEle = lastBtnWebElement.size()-1;
         WebElement ele= lastBtnWebElement.get(indexEle);
-//        jsExecutor.executeScript("arguments[0].click()",ele);
+        jsExecutor.executeScript("arguments[0].click()",ele);
 
-        Actions ac = new Actions(this.getBrowser());
-        ac.moveToElement(ele).click().build().perform();
-//        jsExecutor.executeScript("arguments[0].click()",ele);
-
-        this.driver.waitForPresenceOfElement(4,lastCountOfInvoice);
-        return this.getBrowser().findElement(lastCountOfInvoice).getText();
+        this.driver.waitForPresenceOfElement(6,lastCountOfInvoice);
+        List<WebElement> lastCountOfInvoiceElement = this.getBrowser().findElements(lastCountOfInvoice);
+        int invoiceIndex=lastCountOfInvoiceElement.size()-1;
+        WebElement ele1 = this.getBrowser().findElements(lastCountOfInvoice).get(invoiceIndex);
+        return ele1.getText();
     }
 
     public int getServiceIndexByName(String serviceName){
@@ -174,6 +175,13 @@ public class RespectiveClientEarningsPage extends BasePage{
         jsExecutor.executeScript("window.scrollTo(0, 800);");
         this.driver.waitForPresenceOfElement(4,earningsIcons);
         getEarningIcon = this.getBrowser().findElements(earningsIcons).get(dateIndex);
+        jsExecutor.executeScript("arguments[0].click()", getEarningIcon);
+    }
+    public void clickOnEarningsIcon(int index){
+        WebElement getEarningIcon;
+        jsExecutor.executeScript("window.scrollTo(0, 800);");
+        this.driver.waitForPresenceOfElement(4,earningsIcons);
+        getEarningIcon = this.getBrowser().findElements(earningsIcons).get(index);
         jsExecutor.executeScript("arguments[0].click()", getEarningIcon);
     }
 
