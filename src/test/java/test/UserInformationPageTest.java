@@ -71,9 +71,9 @@ public class UserInformationPageTest {
         return data;
     }
 
-//    @AfterMethod
-//    public void closeApplication() throws MalformedURLException {
-//        loginPage.closeBrowser();
-//    }
+    @AfterMethod
+    public void closeApplication() throws MalformedURLException {
+        loginPage.closeBrowser();
+    }
 
 }
