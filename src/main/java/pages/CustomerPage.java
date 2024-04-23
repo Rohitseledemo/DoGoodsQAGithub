@@ -19,7 +19,7 @@ public class CustomerPage extends BasePage {
         return this.getBrowser().findElements(compList);
     }
 
-    public void searchCustomerClientInList() {
+    public boolean searchCustomerClientInList() {
         List<String> names = new ArrayList<>();
         names.add("Activ Post");
         names.add("America Sunshine");
@@ -40,7 +40,7 @@ public class CustomerPage extends BasePage {
                 break;
             }
         }
-         Assert.assertTrue(allValuesFound);
+         return allValuesFound;
     }
 }
 

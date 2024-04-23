@@ -28,6 +28,8 @@ public class BasePage {
     By yearSelectDropdown;
     By datePicker;
     By regenerateConfirmBtn;
+    By noDataFoundTxt;
+
   public BasePage(){
 	  driver = new BrowserKeeper();
 
@@ -40,11 +42,11 @@ public class BasePage {
       this.goBtn = By.id("earninggen");
       this.monthSelectDropdown =By.xpath("//select[@class='ui-datepicker-month']");
       this.yearSelectDropdown =By.xpath("//select[@class='ui-datepicker-year']");
-      this.datePicker=By.id("datepicker");
+      this.datePicker=By.xpath("//input[@id='datepicker']");
       this.doneBtn=By.xpath("//button[@class='ui-datepicker-close ui-state-default " +
               "ui-priority-primary ui-corner-all']");
-      this.regenerateConfirmBtn = By.xpath("//button[@fdprocessedid='lqum2s']");
-
+      this.regenerateConfirmBtn = By.xpath("//button[@class='btn btn-primary confirm_btn']");
+      this.noDataFoundTxt=By.xpath("//div[@class='callout callout-danger text-danger']");
   }
   public  WebDriver getBrowser(){
     return this.driver.getBrowserInstance();
@@ -63,38 +65,6 @@ public class BasePage {
       this.driver.waitForPresenceOfElement(4,email);
       this.getBrowser().get(URL);
   }
-
-    public void generateEarningsHandler(int dateValue, String yearValue){
-        WebElement generateEarningsBtnElement = this.getBrowser().findElement(generateEarningsBtn);
-        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", generateEarningsBtnElement);
-        jsExecutor.executeScript("arguments[0].click()", generateEarningsBtnElement);
-
-        WebElement datePickerElement = this.getBrowser().findElement(datePicker);
-        Actions ac = new Actions(this.getBrowser());
-        ac.moveToElement(datePickerElement).contextClick();
-//        jsExecutor.executeScript("arguments[0].click()", datePickerElement);
-
-        this.driver.waitForPresenceOfElement(2,monthSelectDropdown);
-        monthSelectDropdownElement = this.getBrowser().findElement(monthSelectDropdown);
-        Select monthSelect = new Select(monthSelectDropdownElement);
-        monthSelect.selectByIndex(dateValue);
-
-        yearSelectDropdownElement = this.getBrowser().findElement(yearSelectDropdown);
-        Select yearSelect = new Select(yearSelectDropdownElement);
-        yearSelect.selectByVisibleText(yearValue);
-
-        WebElement doneBtnElement = this.getBrowser().findElement(doneBtn);
-        jsExecutor.executeScript("arguments[0].click()", doneBtnElement);
-
-        WebElement goBtnElement = this.getBrowser().findElement(goBtn);
-        jsExecutor.executeScript("arguments[0].click()", goBtnElement);
-
-        if (this.getBrowser().findElement(regenerateConfirmBtn).isDisplayed()){
-            jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(regenerateConfirmBtn));
-        }
-
-    }
-
 
 }
   

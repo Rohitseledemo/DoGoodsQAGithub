@@ -1,5 +1,6 @@
 package test;
 
+import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.CustomerPage;
 import pages.DashboardPage;
@@ -37,10 +38,10 @@ public class UserDirectoryPageTest {
         dashboardPage.searchDashboardMenuList();
         dashboardPage.clickOnCustomer();
         customerPage = new CustomerPage();
-        customerPage.searchCustomerClientInList();
+        Assert.assertTrue(customerPage.searchCustomerClientInList());
         dashboardPage.clickOnEarnings();
         earningsPage = new EarningsPage();
-        earningsPage.searchEarningsClientsInList();
+        Assert.assertTrue(earningsPage.searchEarningsClientsInList());
     }
     @DataProvider
     public String[][] getTestData() {

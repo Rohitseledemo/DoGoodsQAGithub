@@ -1,5 +1,6 @@
 package test;
 
+import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.LoginPage;
 import java.net.MalformedURLException;
@@ -33,19 +34,19 @@ public class LoginPageTest {
         loginPage.signInClick();
 
         if (scenario.equalsIgnoreCase("IncorrectEmail")) {
-            loginPage.wrongEmailErrorDisplayed();
+            Assert.assertTrue(loginPage.wrongEmailErrorDisplayed());
 
         } else if (scenario.equalsIgnoreCase("IncorrectPassword")) {
-            loginPage.wrongPasswordErrorDisplayed();
+            Assert.assertTrue(loginPage.wrongPasswordErrorDisplayed());
 
         } else if (scenario.equalsIgnoreCase("EmptyEmail")) {
-            loginPage.emptyEmailErrorDisplayed();
+            Assert.assertTrue(loginPage.emptyEmailErrorDisplayed());
 
         } else if (scenario.equalsIgnoreCase("EmptyPassword")) {
-            loginPage.emptyPasswordErrorDisplayed();
+            Assert.assertTrue(loginPage.emptyPasswordErrorDisplayed());
 
         } else if (scenario.equalsIgnoreCase("CorrectCredentials")) {
-            loginPage.loginVerify();
+            Assert.assertTrue(loginPage.loginVerify());
 
         }
 

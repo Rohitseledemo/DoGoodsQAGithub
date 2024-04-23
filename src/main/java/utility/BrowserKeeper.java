@@ -9,7 +9,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
@@ -38,8 +37,6 @@ public class BrowserKeeper {
        browser = new RemoteWebDriver(new URL("https://" + username + ":" + accessKey +
                "@hub.browserstack.com/wd/hub"), capabilities);
 
-
-
    }
    public  WebDriver getBrowserInstance() {
 	return browser;
@@ -55,7 +52,7 @@ public class BrowserKeeper {
        }
            return result;
    }
-   public boolean waitForPresenceOfWebElement(int waitTime, WebElement ele){
+   public boolean waitForVisibilityOfWebElement(int waitTime, WebElement ele){
        WebDriverWait wait = new WebDriverWait(browser,Duration.ofSeconds(waitTime));
        boolean result = true;
        try{
@@ -66,4 +63,5 @@ public class BrowserKeeper {
        }
        return result;
    }
+
 }

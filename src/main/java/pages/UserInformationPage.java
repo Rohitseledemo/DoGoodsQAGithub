@@ -71,28 +71,26 @@ public class UserInformationPage extends BasePage {
 
     public List<String> randomClientClick() {
         getRandomIndexes(3);
-        js = (JavascriptExecutor) this.getBrowser();
         clientClickWebElements = this.getBrowser().findElements(clientList);
         for (WebElement clientCheckbox : clientClickWebElements) {
             if (clientCheckbox.isSelected()){
-                js.executeScript("arguments[0].click()", clientCheckbox);
+                jsExecutor.executeScript("arguments[0].click()", clientCheckbox);
             }
         }
         clNames = new ArrayList<>();
 
         for(Integer i : randomClientIndex) {
             clientIndexElement = clientClickWebElements.get(i);
-            js.executeScript("arguments[0].scrollIntoView(true);", clientIndexElement);
-            js.executeScript("arguments[0].click()", clientIndexElement);
+            jsExecutor.executeScript("arguments[0].scrollIntoView(true);", clientIndexElement);
+            jsExecutor.executeScript("arguments[0].click()", clientIndexElement);
                 clNames.add(clientIndexElement.getText());
             }
         return clNames;
     }
 
     public void clickOnSaveBtn() {
-        js = (JavascriptExecutor) this.getBrowser();
         saveBtnWebElement = this.getBrowser().findElement(saveBtn);
-        js.executeScript("arguments[0].click()", saveBtnWebElement);
+        jsExecutor.executeScript("arguments[0].click()", saveBtnWebElement);
 //        javaScriptExecutor.executeScript("window.scrollTo(0, 900);");
 //        this.getBrowser().findElement(saveBtn).saveBtnWebElement();
     }

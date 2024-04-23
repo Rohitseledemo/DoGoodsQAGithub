@@ -1,10 +1,8 @@
 package pages;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 
@@ -16,6 +14,7 @@ public class RespectiveClientEarningsPage extends BasePage{
     DecimalFormat df;
 
     WebElement dateDropdownElement;
+    WebElement regenerateConfirmBtnElement;
 
     List<WebElement> dateOptions;
     List<WebElement> accountOptions;
@@ -38,13 +37,15 @@ public class RespectiveClientEarningsPage extends BasePage{
     By avgSavingsPerPkgBtn;
     By dataValueGroundBtn;
     By dataValueFedExReturnBtn;
-    By lastBtn;
+    By pageNavigationBtns;
     By rateNegotiationBtn;
     By rateNegotiationAgreedDatePicker;
     By viewDetailsBtn;
     By downloadViewBtn;
     By showEntriesBtn;
     By lastCountOfInvoice;
+    By allServicesNames;
+    By allServicesCount;
 
 
     public RespectiveClientEarningsPage(){
@@ -60,13 +61,15 @@ public class RespectiveClientEarningsPage extends BasePage{
         this.avgSavingsPerPkgBtn=By.cssSelector("div[id='package_cost_savings'] h6");
         this.dataValueGroundBtn=By.xpath("//a[@data-val='Ground']");
         this.dataValueFedExReturnBtn=By.xpath("//a[@data-val='FedEx Returns']");
-        this.lastBtn=By.xpath("(//li)[last()]");
+        this.pageNavigationBtns =By.xpath("//nav[@aria-label='Page navigation']//li//a");
         this.rateNegotiationBtn=By.xpath("//a[@data-bs-target='#ratenagotiation']");
         this.rateNegotiationAgreedDatePicker=By.id("agreedatepicker");
         this.viewDetailsBtn=By.id("viewDetails");
-        this.showEntriesBtn=By.xpath("//select[@name='earnings_list_length']");
+        this.showEntriesBtn=By.xpath("//select[@name='earnings_list_length']");//select[@name='earnings_list_length']
         this.downloadViewBtn=By.xpath("//button[@fdprocessedid='yfhjon']");
         this.lastCountOfInvoice=By.xpath("(//tbody//tr)[last()][1]");
+        this.allServicesNames=By.xpath("//table[@id='avgerning']//tbody//tr//td[1]");
+        this.allServicesCount=By.xpath("//table[@id='avgerning']//tbody//tr//td[2]");
     }
     public String verifyClientName(){
         return this.getBrowser().findElement(clientTitle).getText();
@@ -77,23 +80,57 @@ public class RespectiveClientEarningsPage extends BasePage{
     public void rateNegotiationDateParser(){
 
     }
-    public void viewDetailsBtnVerify(){
+    public boolean viewDetailsBtnVerify(){
         jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(viewDetailsBtn));
-        this.driver.waitForPresenceOfElement(6,showEntriesBtn);
-        Assert.assertTrue(this.getBrowser().findElement(showEntriesBtn).isDisplayed());
+        this.driver.waitForPresenceOfElement(4,showEntriesBtn);
+        return this.getBrowser().findElement(showEntriesBtn).isDisplayed();
+    }
+
+    public void pageNavigation(int pageNumber){
+        List<WebElement> pageNavigationBtnElements= this.getBrowser().findElements(pageNavigationBtns);
     }
 
     public String groundEntriesCount(){
         this.driver.waitForPresenceOfElement(6,dataValueGroundBtn);
         jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(dataValueGroundBtn));
-        this.driver.waitForPresenceOfElement(4,lastBtn);
+        this.driver.waitForPresenceOfElement(4,pageNavigationBtns);
+        List<WebElement> lastBtnWebElement = this.getBrowser().findElements(pageNavigationBtns);
+        int indexEle = lastBtnWebElement.size()-1;
+        WebElement ele= lastBtnWebElement.get(indexEle);
+//        jsExecutor.executeScript("arguments[0].click()",ele);
+
         Actions ac = new Actions(this.getBrowser());
-        WebElement lastBtnElement = this.getBrowser().findElement(lastBtn);
-        ac.click(lastBtnElement);
-//        jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(lastBtn));
+        ac.moveToElement(ele).click().build().perform();
+//        jsExecutor.executeScript("arguments[0].click()",ele);
+
         this.driver.waitForPresenceOfElement(4,lastCountOfInvoice);
         return this.getBrowser().findElement(lastCountOfInvoice).getText();
     }
+
+    public int getServiceIndexByName(String serviceName){
+        int index=0;
+        this.driver.waitForPresenceOfElement(4,allServicesNames);
+        List<WebElement> allServicesElements = this.getBrowser().findElements(allServicesNames);
+        for (int i=0;i<allServicesElements.size();i++){
+            String serviceText =allServicesElements.get(i).getText();
+            if (serviceName.equalsIgnoreCase(serviceText)){
+                  index = i;
+            }
+        }
+        return index;
+    }
+    public String getService_FedExReturnsCount(){
+        int index = getServiceIndexByName("FedEx Returns");
+        List<WebElement> allServicesCountElements = this.getBrowser().findElements(allServicesCount);
+        return allServicesCountElements.get(index).getText();
+    }
+    public String getService_GroundCount(){
+        int index = getServiceIndexByName("Ground");
+        List<WebElement> allServicesCountElements = this.getBrowser().findElements(allServicesCount);
+        return allServicesCountElements.get(index).getText();
+    }
+
+
     public void averageSavingsPkgDataCardClick(){
         jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(avgSavingsPerPkgBtn));
     }
@@ -106,61 +143,75 @@ public class RespectiveClientEarningsPage extends BasePage{
 
     public void generateEarningsBtnClick(){
         this.driver.waitForPresenceOfElement(4,generateEarningsBtn);
-        this.getBrowser().findElement(generateEarningsBtn);
+        jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(generateEarningsBtn));
+    }
+
+    public void datePickerHandler(String dateValue, String yearValue){
+        WebElement datePickerElement = this.getBrowser().findElement(datePicker);
+        this.driver.waitForVisibilityOfWebElement(4,datePickerElement);
+
+        Actions ac = new Actions(this.getBrowser());
+        ac.moveToElement(datePickerElement).click().build().perform();
+
+        this.driver.waitForPresenceOfElement(2,monthSelectDropdown);
+        monthSelectDropdownElement = this.getBrowser().findElement(monthSelectDropdown);
+        Select monthSelect = new Select(monthSelectDropdownElement);
+        monthSelect.selectByVisibleText(dateValue);
+
+        yearSelectDropdownElement = this.getBrowser().findElement(yearSelectDropdown);
+        Select yearSelect = new Select(yearSelectDropdownElement);
+        yearSelect.selectByVisibleText(yearValue);
+
+        WebElement doneBtnElement = this.getBrowser().findElement(doneBtn);
+        jsExecutor.executeScript("arguments[0].click()", doneBtnElement);
+
+        WebElement goBtnElement = this.getBrowser().findElement(goBtn);
+        jsExecutor.executeScript("arguments[0].click()", goBtnElement);
     }
 
     public void clickOnEarningsIcon(){
         WebElement getEarningIcon;
-        js =(JavascriptExecutor)this.getBrowser();
-        js.executeScript("window.scrollTo(0, 800);");
+        jsExecutor.executeScript("window.scrollTo(0, 800);");
         this.driver.waitForPresenceOfElement(4,earningsIcons);
         getEarningIcon = this.getBrowser().findElements(earningsIcons).get(dateIndex);
-        js.executeScript("arguments[0].click()", getEarningIcon);
+        jsExecutor.executeScript("arguments[0].click()", getEarningIcon);
     }
-    public void generateEarningsValidate(int testCase) {
-        switch (testCase) {
-            case 1:
-                System.out.println("No Data found in given period testCase 1");
-                generateEarningsHandler(3, "2024");
-                boolean noDataFoundText = this.getBrowser().findElement(By.xpath("//div[@class" +
-                        "='callout callout-danger" + " text-danger']")).isDisplayed();
-                Assert.assertTrue(noDataFoundText);
-                break;
 
-            case 2:
-                System.out.println("regenerate pop-up testCase 2");
-                generateEarningsHandler(2, "2024");
-                boolean regenerate = this.getBrowser().findElement(regenerateConfirmBtn).isDisplayed();
-                this.getBrowser().findElement(By.xpath("//button[@fdprocessedid='edqf6k']")).click();
-                Assert.assertTrue(regenerate);
-                break;
-
-            case 3:
-                System.out.println("Agreement date pop-up testCase3");
-                generateEarningsHandler(2, "2019");
-                String agreementExpected = "You cannot select date before agreement.";
-                String agreementActual = this.getBrowser().switchTo().alert().getText();
-                Assert.assertEquals(agreementActual, agreementExpected);
-                break;
-
-            case 4:
-                System.out.println("generating earnings testCase 4");
-                generateEarningsHandler(2, "2024");
-                this.driver.waitForPresenceOfElement(4, earningsIcons);
-                this.getBrowser().findElement(earningsIcons).click();
-                this.driver.waitForPresenceOfElement(400, totalSavings);
-                totalSavingsCalculate();
+    public boolean generateEarningsNoDataFound(){
+        WebElement noDataFoundTxtWebElement = this.getBrowser().findElement(noDataFoundTxt);
+        this.driver.waitForVisibilityOfWebElement(4,noDataFoundTxtWebElement);
+        return noDataFoundTxtWebElement.isDisplayed();
+    }
+    public boolean generateEarningsRegeneratePopup(){
+        WebElement regenerateConfirmBtnElement = this.getBrowser().findElement
+                (By.xpath("//button[@class='btn btn-primary confirm_btn']"));
+        this.driver.waitForVisibilityOfWebElement(4, regenerateConfirmBtnElement);
+        return regenerateConfirmBtnElement.isDisplayed();
+    }
+    public boolean generateEarningsAgreementDatePopup(){
+        try {
+             this.getBrowser().switchTo().alert().accept();
+             return true;
+        }
+        catch (NoAlertPresentException e) {
+            System.out.println("No alert present on the webpage.");
+            return false;
         }
     }
-        public void generateEarningsTestCaseIterator(){
-            for (int i=1;i<=4;i++){
-                generateEarningsValidate(i);
-            }
+    public boolean generateEarningsSuccessfully(){
+        try{
+            this.driver.waitForVisibilityOfWebElement(4,regenerateConfirmBtnElement);
+            this.getBrowser().findElement(regenerateConfirmBtn).click();
+            return true;
         }
+        catch(Exception e){
+            return false;
+        }
+    }
 
     public void generateRandomIndex(){
         Random rand = new Random();
-        this.dateIndex = rand.nextInt(3);
+        this.dateIndex = rand.nextInt(2);
     }
 
     public void compareDates(){

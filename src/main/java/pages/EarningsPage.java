@@ -4,8 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,16 +18,18 @@ public class EarningsPage extends BasePage {
     By clientNameClick;
     By testClientName;
     By companyTextBox;
+    By clientNamesList;
 
     public EarningsPage() {
         this.title = By.xpath("//h3[normalize-space()='Customer Listing']");
         this.clientNameClick= By.xpath("//td[normalize-space()='Azazie']");
         this.testClientName= By.xpath("//td[normalize-space()='Selenium Testing']");
         this.companyTextBox=By.xpath("//input[@placeholder='Company']");
+        this.clientNamesList=By.xpath("//tbody/tr/td[3]");
     }
 
     public List<WebElement> getAllClientsNames() {
-        return this.getBrowser().findElements(By.xpath("//tbody/tr/td[2]"));
+        return this.getBrowser().findElements(clientNamesList);
     }
 
     public Optional<WebElement> getSpecificClientName(String clientName) {
@@ -37,25 +42,18 @@ public class EarningsPage extends BasePage {
         return this.getBrowser().findElement(title).isDisplayed();
     }
 
-
-    public void typeClientNameAndClickOnIt() {
+    public void typeClientNameAndClickOnIt(String clientName) {
         Actions ac = new Actions(this.getBrowser());
-        WebElement companyTextBoxWebElement=this.getBrowser().findElement(companyTextBox);
-        String clientName = "sel";
-        ac.moveToElement(companyTextBoxWebElement).sendKeys(clientName, Keys.RETURN).perform();
-        this.driver.waitForPresenceOfElement(4,clientNameClick);
-        jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(clientNameClick));
-    }
-    public void typeClientNameAndClickOnIt2() {
-        Actions ac = new Actions(this.getBrowser());
-        WebElement companyTextBoxWebElement=this.getBrowser().findElement(companyTextBox);
-        String clientName = "sel";
-        ac.moveToElement(companyTextBoxWebElement).sendKeys(clientName, Keys.RETURN).perform();
-        this.driver.waitForPresenceOfElement(4,testClientName);
-        jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(testClientName));
+        ac.moveToElement(this.getBrowser().findElement(companyTextBox)).click().sendKeys
+                (clientName, Keys.RETURN).build().perform();
+        WebDriverWait wait = new WebDriverWait(this.getBrowser(),Duration.ofSeconds(2));
+        wait.until(ExpectedConditions.numberOfElementsToBeLessThan(clientNamesList,2));
+        WebElement firstRowAppearance = this.getBrowser().findElement(clientNamesList);
+        this.driver.waitForVisibilityOfWebElement(4,firstRowAppearance);
+        jsExecutor.executeScript("arguments[0].click()",firstRowAppearance);
     }
 
-    public void searchEarningsClientsInList() {
+    public boolean searchEarningsClientsInList() {
         List<String> names = new ArrayList<>();
         names.add("Activ Post");
         names.add("America Sunshine");
@@ -76,7 +74,7 @@ public class EarningsPage extends BasePage {
                     break;
                 }
             }
-            Assert.assertTrue(allValuesFound);
+            return allValuesFound;
         }
     }
 
