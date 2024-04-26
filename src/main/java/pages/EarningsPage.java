@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -19,6 +20,7 @@ public class EarningsPage extends BasePage {
     By testClientName;
     By companyTextBox;
     By clientNamesList;
+    By mbgSelectDropdown;
 
     public EarningsPage() {
         this.title = By.xpath("//h3[normalize-space()='Customer Listing']");
@@ -26,6 +28,7 @@ public class EarningsPage extends BasePage {
         this.testClientName= By.xpath("//td[normalize-space()='Selenium Testing']");
         this.companyTextBox=By.xpath("//input[@placeholder='Company']");
         this.clientNamesList=By.xpath("//tbody/tr/td[3]");
+        this.mbgSelectDropdown=By.xpath("//select[@name='earnings_calc_types']");
     }
 
     public List<WebElement> getAllClientsNames() {
@@ -43,10 +46,15 @@ public class EarningsPage extends BasePage {
     }
 
     public void typeClientNameAndClickOnIt(String clientName) {
-        Actions ac = new Actions(this.getBrowser());
-        ac.moveToElement(this.getBrowser().findElement(companyTextBox)).click().sendKeys
-                (clientName, Keys.RETURN).build().perform();
-        WebDriverWait wait = new WebDriverWait(this.getBrowser(),Duration.ofSeconds(2));
+        this.driver.waitForVisibilityOfWebElement(4,this.getBrowser().findElement(clientTitle));
+        Select earnCalcTypes= new Select(this.getBrowser().findElement(mbgSelectDropdown));
+        earnCalcTypes.selectByVisibleText("Select");
+        this.getBrowser().findElement(companyTextBox).sendKeys(clientName);
+//        Actions ac = new Actions(this.getBrowser());
+//        ac.moveToElement(this.getBrowser().findElement(companyTextBox)).click();
+//        ac.sendKeys(this.getBrowser().findElement(companyTextBox),clientName, Keys.RETURN).build().perform();
+//        ac.sendKeys(clientName, Keys.RETURN).build().perform();
+        WebDriverWait wait = new WebDriverWait(this.getBrowser(),Duration.ofSeconds(5));
         wait.until(ExpectedConditions.numberOfElementsToBeLessThan(clientNamesList,2));
         WebElement firstRowAppearance = this.getBrowser().findElement(clientNamesList);
         this.driver.waitForVisibilityOfWebElement(4,firstRowAppearance);

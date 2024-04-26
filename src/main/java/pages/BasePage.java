@@ -29,6 +29,7 @@ public class BasePage {
     By datePicker;
     By regenerateConfirmBtn;
     By noDataFoundTxt;
+    By clientTitle;
 
   public BasePage(){
 	  driver = new BrowserKeeper();
@@ -47,6 +48,7 @@ public class BasePage {
               "ui-priority-primary ui-corner-all']");
       this.regenerateConfirmBtn = By.xpath("//button[@class='btn btn-primary confirm_btn']");
       this.noDataFoundTxt=By.xpath("//div[@class='callout callout-danger text-danger']");
+      this.clientTitle=By.xpath("//div[@class='mb-3 d-sm-block d-md-flex']//h3");
   }
   public  WebDriver getBrowser(){
     return this.driver.getBrowserInstance();

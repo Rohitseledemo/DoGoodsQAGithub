@@ -1,5 +1,6 @@
 package test;
 
+import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.DashboardPage;
 import pages.LoginPage;
@@ -43,7 +44,7 @@ public class UserInformationPageTest {
         dashboardPage = new DashboardPage();
         dashboardPage.clickOnUserDirectory();
         userDirectoryPage = new UserDirectoryPage();
-        userDirectoryPage.userTestEditBtnClick();
+        userDirectoryPage.clickOnEditBtnByUsername("RohitTest");
         userInfoObject= new UserInfoObject();
         userInformationPage = new UserInformationPage();
         userInformationPage.randomMenuClick();
@@ -55,8 +56,8 @@ public class UserInformationPageTest {
         loginPage.setPassword(testPassword);
         loginPage.rememberMeClick();
         loginPage.signInClick();
-
-        dashboardPage.checkDashboardMenuList(userInformationPage.menuNames);
+        boolean result = dashboardPage.checkDashboardMenuList(userInformationPage.menuNames);
+        Assert.assertTrue(result);
 
 
     }
