@@ -18,7 +18,7 @@ public class RespectiveClientEarningsPageTest {
     public void launchBrowser(@Optional("admin@dogoodsinc.com") String email,
                               @Optional("Admin@Shipplug2024!")String password,
                               @Optional("https://qa-admin.dogoodsinc.com/admin/")String Url)
-            throws MalformedURLException {
+                              throws MalformedURLException {
 
         this.url = Url;
         this.email = email;
@@ -27,96 +27,105 @@ public class RespectiveClientEarningsPageTest {
         loginPage = new LoginPage();
         loginPage.launchNewBrowserInstance();
     }
+
     @Test
     public void monthlyEarningsTest() {
+        dashboardPage = new DashboardPage();
+        earningsPage = new EarningsPage();
+        respectiveClientEarningsPage = new RespectiveClientEarningsPage();
+
         loginPage.launchUrl(this.url);
         loginPage.setEmailAddress(this.email);
         loginPage.setPassword(this.password);
         loginPage.rememberMeClick();
         loginPage.signInClick();
-        dashboardPage = new DashboardPage();
         dashboardPage.clickOnEarnings();
-        earningsPage = new EarningsPage();
         earningsPage.typeClientNameAndClickOnIt("Activ");
-        respectiveClientEarningsPage = new RespectiveClientEarningsPage();
         respectiveClientEarningsPage.compareDates();
         respectiveClientEarningsPage.totalSavingsCalculate();
     }
     @Test
     public void viewDetailsBtnValidation(){
+        dashboardPage = new DashboardPage();
+        earningsPage = new EarningsPage();
+        respectiveClientEarningsPage = new RespectiveClientEarningsPage();
+
         loginPage.launchUrl(this.url);
         loginPage.setEmailAddress(this.email);
         loginPage.setPassword(this.password);
         loginPage.rememberMeClick();
         loginPage.signInClick();
-        dashboardPage = new DashboardPage();
         dashboardPage.clickOnEarnings();
-        earningsPage = new EarningsPage();
         earningsPage.typeClientNameAndClickOnIt("Activ");
-        respectiveClientEarningsPage = new RespectiveClientEarningsPage();
         respectiveClientEarningsPage.clickOnEarningsIcon(0);
         Assert.assertTrue(respectiveClientEarningsPage.viewDetailsBtnVerify());
     }
     @Test
     public void accountValidation(){
+        dashboardPage = new DashboardPage();
+        earningsPage = new EarningsPage();
+        respectiveClientEarningsPage = new RespectiveClientEarningsPage();
+
         loginPage.launchUrl(this.url);
         loginPage.setEmailAddress(this.email);
         loginPage.setPassword(this.password);
         loginPage.rememberMeClick();
         loginPage.signInClick();
-        dashboardPage = new DashboardPage();
         dashboardPage.clickOnEarnings();
-        earningsPage = new EarningsPage();
         earningsPage.typeClientNameAndClickOnIt("Azazie");
-        respectiveClientEarningsPage = new RespectiveClientEarningsPage();
         respectiveClientEarningsPage.clickOnEarningsIcon();
         respectiveClientEarningsPage.changeAccountAndValidateTotalSavings();
     }
     @Test
     public void monthValidation(){
+        dashboardPage = new DashboardPage();
+        earningsPage = new EarningsPage();
+        respectiveClientEarningsPage = new RespectiveClientEarningsPage();
+
         loginPage.launchUrl(this.url);
         loginPage.setEmailAddress(this.email);
         loginPage.setPassword(this.password);
         loginPage.rememberMeClick();
         loginPage.signInClick();
-        dashboardPage = new DashboardPage();
         dashboardPage.clickOnEarnings();
-        earningsPage = new EarningsPage();
         earningsPage.typeClientNameAndClickOnIt("Azazie");
-        respectiveClientEarningsPage = new RespectiveClientEarningsPage();
         respectiveClientEarningsPage.clickOnEarningsIcon();
         respectiveClientEarningsPage.changeMonthAndValidateTotalSavings();
     }
     @Test
     public void groundEntriesCountTest(){
+        earningsPage = new EarningsPage();
+        dashboardPage = new DashboardPage();
+        dashboardPage = new DashboardPage();
+        respectiveClientEarningsPage = new RespectiveClientEarningsPage();
+        int index;
         loginPage.launchUrl(this.url);
         loginPage.setEmailAddress(this.email);
         loginPage.setPassword(this.password);
         loginPage.rememberMeClick();
         loginPage.signInClick();
-        dashboardPage = new DashboardPage();
         dashboardPage.clickOnEarnings();
-        earningsPage = new EarningsPage();
-        earningsPage.typeClientNameAndClickOnIt("Sel");
-        respectiveClientEarningsPage = new RespectiveClientEarningsPage();
+        respectiveClientEarningsPage.verifyClientName();
+        earningsPage.typeClientNameAndClickOnIt("Selenium Testing");
         respectiveClientEarningsPage.clickOnEarningsIcon();
         respectiveClientEarningsPage.averageSavingsPkgDataCardClick();
-//        Assert.assertEquals(respectiveClientEarningsPage.getService_GroundCount()
-//                ,respectiveClientEarningsPage.groundEntriesCount());
-//        respectiveClientEarningsPage.groundEntriesCount();
+        index =respectiveClientEarningsPage.getServiceIndexByName("Ground");
+        respectiveClientEarningsPage.getService_GroundCount(index);
+        respectiveClientEarningsPage.groundEntriesCount();
     }
     @Test(dataProvider = "getDatePickerData")
     public void generateEarningsBtnTest(String scenario, String dateValue, String yearValue){
+        dashboardPage = new DashboardPage();
+        earningsPage = new EarningsPage();
+        respectiveClientEarningsPage = new RespectiveClientEarningsPage();
+
         loginPage.launchUrl(this.url);
         loginPage.setEmailAddress(this.email);
         loginPage.setPassword(this.password);
         loginPage.rememberMeClick();
         loginPage.signInClick();
-        dashboardPage = new DashboardPage();
         dashboardPage.clickOnEarnings();
-        earningsPage = new EarningsPage();
-        earningsPage.typeClientNameAndClickOnIt("Sel");
-        respectiveClientEarningsPage = new RespectiveClientEarningsPage();
+        earningsPage.typeClientNameAndClickOnIt("Selenium Testing");
         respectiveClientEarningsPage.generateEarningsBtnClick();
         respectiveClientEarningsPage.datePickerHandler(dateValue,yearValue);
 

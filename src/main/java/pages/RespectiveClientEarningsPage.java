@@ -25,7 +25,6 @@ public class RespectiveClientEarningsPage extends BasePage{
     Map<String,String> map1;
     Map<String,String> map2;
 
-    By clientTitle;
     By earningsIcons;
     By dates;
     By dateValues;
@@ -46,10 +45,14 @@ public class RespectiveClientEarningsPage extends BasePage{
     By lastCountOfInvoice;
     By allServicesNames;
     By allServicesCount;
+    By currentActiveClass;
+    By accountNumberBtn;
+    By accountNamesTextBox;
+    By invoiceByAccountCheckbox;
+    By accountBtnSubmitBtn;
 
 
     public RespectiveClientEarningsPage(){
-        this.clientTitle=By.xpath("//h3[@class='col-5']");
         this.earningsIcons=By.xpath("//tbody/tr/td//a[@class='earning']");
         this.dates=By.xpath("//div[@id='earningDetails'] //tbody//tr//td[2]");
         this.dateValues=By.xpath("//div[@id='earningDetails'] //tbody//tr//td[6]");
@@ -70,6 +73,12 @@ public class RespectiveClientEarningsPage extends BasePage{
         this.lastCountOfInvoice=By.xpath("//tbody//tr// td[@valign='top'][1]");
         this.allServicesNames=By.xpath("//table[@id='avgerning']//tbody//tr//td[1]");
         this.allServicesCount=By.xpath("//table[@id='avgerning']//tbody//tr//td[2]");
+        this.currentActiveClass=By.xpath("//li[(@class='active')]//a");
+        this.accountNumberBtn=By.xpath("//div[@class='pull-right']//a[text()='Account Number']");
+        this.accountNamesTextBox=By.xpath("//th[@class='text-center']//input[@type='text']");
+        this.invoiceByAccountCheckbox=By.xpath("//input[@id='invoice_by_account']");
+        this.accountBtnSubmitBtn=By.xpath("//button[@type='Submit']");
+
     }
     public String verifyClientName(){
         return this.getBrowser().findElement(clientTitle).getText();
@@ -92,24 +101,76 @@ public class RespectiveClientEarningsPage extends BasePage{
         List<WebElement> pageNavigationBtnElements= this.getBrowser().findElements(pageNavigationBtns);
     }
 
-    public String groundEntriesCount(){
-        this.driver.waitForPresenceOfElement(6,dataValueGroundBtn);
-        jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(dataValueGroundBtn));
-        this.driver.waitForPresenceOfElement(4,pageNavigationBtns);
-        List<WebElement> lastBtnWebElement = this.getBrowser().findElements(pageNavigationBtns);
-        int indexEle = lastBtnWebElement.size()-1;
-        WebElement ele= lastBtnWebElement.get(indexEle);
-        jsExecutor.executeScript("arguments[0].click()",ele);
+    public void clickOnAccountNumberBtnOnRight(){
+        this.driver.waitForPresenceOfElement(4,accountNumberBtn);
+        this.getBrowser().findElement(accountNumberBtn).click();
+    }
+    public void clickAccountBtnSubmitBtn(){
+        WebElement accountBtnSubmitBtnElement = this.getBrowser().findElement(accountBtnSubmitBtn);
+        jsExecutor.executeScript("arguments[0].click()",accountBtnSubmitBtnElement);
+    }
 
-        this.driver.waitForPresenceOfElement(6,lastCountOfInvoice);
-        List<WebElement> lastCountOfInvoiceElement = this.getBrowser().findElements(lastCountOfInvoice);
-        int invoiceIndex=lastCountOfInvoiceElement.size()-1;
-        WebElement ele1 = this.getBrowser().findElements(lastCountOfInvoice).get(invoiceIndex);
-        return ele1.getText();
+    public int countAccountBtnAccountNames(){
+        this.driver.waitForPresenceOfElement(4,accountNamesTextBox);
+        int nameCount = 0;
+        List<WebElement> accountNames=this.getBrowser().findElements(accountNamesTextBox);
+        for (WebElement accountName : accountNames) {
+            String val = accountName.getAttribute("value");
+            if (val != null) {
+                nameCount++;
+            }
+        }
+        return nameCount;
+
+    }
+    public void clickInvoiceByAccountCheckbox(){
+        WebElement invoiceByAccountCheckboxElement = this.getBrowser().findElement(invoiceByAccountCheckbox);
+        if (!invoiceByAccountCheckboxElement.isSelected()) {
+            jsExecutor.executeScript("arguments[0].click()", invoiceByAccountCheckboxElement);
+        }
+    }
+
+
+
+    public void groundEntriesCount() {
+        String actualCount = null;
+        this.driver.waitForPresenceOfElement(6, dataValueGroundBtn);
+        jsExecutor.executeScript("arguments[0].click()", this.getBrowser().findElement(dataValueGroundBtn));
+        this.driver.waitForPresenceOfElement(4, currentActiveClass);
+
+        WebElement currentActiveClassWebElement = this.getBrowser().findElement(currentActiveClass);
+        String currentPageNo = currentActiveClassWebElement.getText();
+        System.out.println("currentPageNo - " + currentActiveClassWebElement.getText());
+
+            if (currentPageNo.equalsIgnoreCase("1")) {
+                this.driver.waitForVisibilityOfWebElement(4, currentActiveClassWebElement);
+                List<WebElement> lastBtnWebElement = this.getBrowser().findElements(pageNavigationBtns);
+                int indexEle = lastBtnWebElement.size() - 1;
+                WebElement ele = lastBtnWebElement.get(indexEle);
+                jsExecutor.executeScript("arguments[0].click()", ele);
+        }
+            WebElement updatedActiveClassWebElement = this.getBrowser().findElement(By.xpath("//li[(@class='active')]//a"));
+            String updatedPageNo = updatedActiveClassWebElement.getText();
+            System.out.println("updatedPageNo"+ updatedActiveClassWebElement.getText());
+
+             if (!currentPageNo.equalsIgnoreCase(updatedPageNo)){
+                this.driver.waitForVisibilityOfWebElement(6, updatedActiveClassWebElement);
+                List<WebElement> lastCountOfInvoiceElementsList = this.getBrowser().findElements(lastCountOfInvoice);
+                int invoiceIndex = lastCountOfInvoiceElementsList.size() - 1;
+                WebElement lastCountOfInvoiceElement = this.getBrowser().findElements(lastCountOfInvoice).get(invoiceIndex);
+                System.out.println("actual value - " + lastCountOfInvoiceElement.getText());
+                actualCount = lastCountOfInvoiceElement.getText();
+                 }
+
+//            return actualCount;
+
     }
 
     public int getServiceIndexByName(String serviceName){
         int index=0;
+        this.driver.waitForPresenceOfElement(4,dataValueGroundBtn);
+        WebElement visibilityEle =this.getBrowser().findElement(dataValueGroundBtn);
+        this.driver.waitForVisibilityOfWebElement(4,visibilityEle);
         this.driver.waitForPresenceOfElement(4,allServicesNames);
         List<WebElement> allServicesElements = this.getBrowser().findElements(allServicesNames);
         for (int i=0;i<allServicesElements.size();i++){
@@ -125,14 +186,16 @@ public class RespectiveClientEarningsPage extends BasePage{
         List<WebElement> allServicesCountElements = this.getBrowser().findElements(allServicesCount);
         return allServicesCountElements.get(index).getText();
     }
-    public String getService_GroundCount(){
-        int index = getServiceIndexByName("Ground");
+    public String getService_GroundCount(int index){
+        this.driver.waitForPresenceOfElement(4,allServicesCount);
         List<WebElement> allServicesCountElements = this.getBrowser().findElements(allServicesCount);
+        System.out.println("expected value - "+allServicesCountElements.get(index).getText());
         return allServicesCountElements.get(index).getText();
     }
 
 
     public void averageSavingsPkgDataCardClick(){
+        this.driver.waitForPresenceOfElement(4,avgSavingsPerPkgBtn);
         jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(avgSavingsPerPkgBtn));
     }
 

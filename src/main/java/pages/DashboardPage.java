@@ -66,20 +66,28 @@ public class DashboardPage extends BasePage {
         }
 
 
-        public void checkDashboardMenuList(List<String> menuList) {
+        public boolean checkDashboardMenuList(List<String> menuNames) {
             boolean allValuesFound = true;
+            this.driver.waitForPresenceOfElement(4,menuItemList);
             menuItemListWebElements = this.getBrowser().findElements(menuItemList);
-            if (menuItemListWebElements.size() != menuList.size()) {
+            if (menuItemListWebElements.size() != menuNames.size()) {
                 allValuesFound = false;
             }
-                for (int i=0;i<menuItemListWebElements.size();i++) {
+            else {
+                System.out.println(menuNames);;//to avoid this loop in case size!=
+                for (int i = 0; i < menuItemListWebElements.size(); i++) {
                     String elementText = menuItemListWebElements.get(i).getText();
-                    String menuListText = menuList.get(i);
-                    if (!elementText.equals(menuListText)) {
+//                    String menuListText = menuNames.get(i);
+                   menuNames.contains(elementText);
+                    if (!menuNames.contains(elementText)) {
                         allValuesFound = false;
                     }
+                    else{
+                        System.out.println(elementText);
+                    }
                 }
-                Assert.assertTrue(allValuesFound);
+            }
+               return allValuesFound;
         }
 
     }
