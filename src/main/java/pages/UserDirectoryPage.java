@@ -2,10 +2,12 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import utility.WebDriverWaits;
 
 import java.util.List;
 
 public class UserDirectoryPage extends BasePage{
+    WebDriverWaits wait;
     WebElement getEditBtn;
     By yourProfile;
     By manageAccount;
@@ -30,8 +32,10 @@ public class UserDirectoryPage extends BasePage{
         this.getBrowser().findElement(addNew).click();
     }
     public void clickOnEditBtnByUsername(String userName){
+        wait = new WebDriverWaits(this.getBrowser());
+
         int index=0;
-        this.driver.waitForPresenceOfElement(4,userNameList);
+        wait.waitForPresenceOfElement(4,userNameList);
         List<WebElement> userNameListElement = this.getBrowser().findElements(userNameList);
         for (int i = 0; i< userNameListElement.size(); i++) {
             String userNameText = userNameListElement.get(i).getText();
@@ -48,8 +52,10 @@ public class UserDirectoryPage extends BasePage{
     }
 
     public void logoutToLandingPage(){
+        wait = new WebDriverWaits(this.getBrowser());
+
         jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(yourProfile));
-        this.driver.waitForPresenceOfElement(2,logOut);
+        wait.waitForPresenceOfElement(2,logOut);
         jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(logOut));
     }
 }

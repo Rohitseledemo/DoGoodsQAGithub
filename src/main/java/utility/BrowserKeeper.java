@@ -42,27 +42,6 @@ public class BrowserKeeper {
    public  WebDriver getBrowserInstance() {
 	return browser;
    }
-   public boolean waitForPresenceOfElement(int waitTime, By ele){
-       WebDriverWait wait = new WebDriverWait( browser,Duration.ofSeconds(waitTime));
-       boolean result = true;
-       try{
-       wait.until(ExpectedConditions.presenceOfElementLocated(ele));
-       }
-       catch (Exception e){
-           result = false;
-       }
-           return result;
-   }
-   public boolean waitForVisibilityOfWebElement(int waitTime, WebElement ele){
-       WebDriverWait wait = new WebDriverWait(browser,Duration.ofSeconds(waitTime));
-       boolean result = true;
-       try{
-           wait.until(ExpectedConditions.visibilityOf(ele));
-       }
-       catch (Exception e){
-           result = false;
-       }
-       return result;
-   }
+
 
 }

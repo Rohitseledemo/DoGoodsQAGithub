@@ -3,11 +3,13 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import utility.WebDriverWaits;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerPage extends BasePage {
+    WebDriverWaits wait;
     By compList;
 
     public CustomerPage() {
@@ -15,7 +17,9 @@ public class CustomerPage extends BasePage {
     }
 
     public List<WebElement> getAllNames() {
-        this.driver.waitForPresenceOfElement(4,compList);
+        wait = new WebDriverWaits(this.getBrowser());
+
+        wait.waitForPresenceOfElement(4,compList);
         return this.getBrowser().findElements(compList);
     }
 

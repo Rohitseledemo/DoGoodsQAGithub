@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import utility.BrowserKeeper;
+import utility.WebDriverWaits;
+
 import java.net.MalformedURLException;
 
 public class BasePage {
@@ -64,7 +66,9 @@ public class BasePage {
       this.getBrowser().quit();
   }
   public void launchUrl(String URL) {
-      this.driver.waitForPresenceOfElement(4,email);
+      WebDriverWaits wait = new WebDriverWaits(this.getBrowser());
+
+      wait.waitForPresenceOfElement(4,email);
       this.getBrowser().get(URL);
   }
 

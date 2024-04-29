@@ -9,6 +9,7 @@ import pages.UserInformationPage;
 import userInputObjects.UserInfoObject;
 
 import java.net.MalformedURLException;
+import java.util.List;
 
 public class UserInformationPageTest {
 
@@ -36,17 +37,18 @@ public class UserInformationPageTest {
     }
    @Test(dataProvider = "getTestData")
    public void setAccessTest(String testEmail, String testPassword){
+       dashboardPage = new DashboardPage();
+       userDirectoryPage = new UserDirectoryPage();
+       userInfoObject= new UserInfoObject();
+       userInformationPage = new UserInformationPage();
+
         loginPage.launchUrl(this.url);
         loginPage.setEmailAddress(this.email);
         loginPage.setPassword(this.password);
         loginPage.rememberMeClick();
         loginPage.signInClick();
-        dashboardPage = new DashboardPage();
         dashboardPage.clickOnUserDirectory();
-        userDirectoryPage = new UserDirectoryPage();
         userDirectoryPage.clickOnEditBtnByUsername("RohitTest");
-        userInfoObject= new UserInfoObject();
-        userInformationPage = new UserInformationPage();
         userInformationPage.randomMenuClick();
         userInformationPage.randomClientClick();
         userInformationPage.clickOnSaveBtn();
@@ -56,7 +58,8 @@ public class UserInformationPageTest {
         loginPage.setPassword(testPassword);
         loginPage.rememberMeClick();
         loginPage.signInClick();
-        boolean result = dashboardPage.checkDashboardMenuList(userInformationPage.menuNames);
+        List<String> menuNames = userInformationPage.menuNames;
+        boolean result = dashboardPage.checkDashboardMenuList(menuNames);
         Assert.assertTrue(result);
 
 
@@ -72,9 +75,9 @@ public class UserInformationPageTest {
         return data;
     }
 
-    @AfterMethod
-    public void closeApplication() throws MalformedURLException {
-        loginPage.closeBrowser();
-    }
+//    @AfterMethod
+//    public void closeApplication() throws MalformedURLException {
+//        loginPage.closeBrowser();
+//    }
 
 }
