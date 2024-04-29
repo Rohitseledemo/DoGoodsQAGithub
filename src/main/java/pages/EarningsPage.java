@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import utility.WebDriverWaits;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class EarningsPage extends BasePage {
+    WebDriverWaits wait;
+
     By title;
     By clientNameClick;
     By testClientName;
@@ -41,23 +44,24 @@ public class EarningsPage extends BasePage {
     }
 
     public boolean verifyTitle() {
-        this.driver.waitForPresenceOfElement(4, title);
+        wait = new WebDriverWaits(this.getBrowser());
+
+        wait.waitForPresenceOfElement(4, title);
         return this.getBrowser().findElement(title).isDisplayed();
     }
 
     public void typeClientNameAndClickOnIt(String clientName) {
-        this.driver.waitForVisibilityOfWebElement(4,this.getBrowser().findElement(clientTitle));
-        Select earnCalcTypes= new Select(this.getBrowser().findElement(mbgSelectDropdown));
-        earnCalcTypes.selectByVisibleText("Select");
+        wait = new WebDriverWaits(this.getBrowser());
+
+        wait.waitForVisibilityOfWebElement(4,this.getBrowser().findElement(clientTitle));
         this.getBrowser().findElement(companyTextBox).sendKeys(clientName);
 //        Actions ac = new Actions(this.getBrowser());
 //        ac.moveToElement(this.getBrowser().findElement(companyTextBox)).click();
 //        ac.sendKeys(this.getBrowser().findElement(companyTextBox),clientName, Keys.RETURN).build().perform();
 //        ac.sendKeys(clientName, Keys.RETURN).build().perform();
-        WebDriverWait wait = new WebDriverWait(this.getBrowser(),Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.numberOfElementsToBeLessThan(clientNamesList,2));
+        wait.waitForNumberOfElementsToBeLessThan(clientNamesList,2);
         WebElement firstRowAppearance = this.getBrowser().findElement(clientNamesList);
-        this.driver.waitForVisibilityOfWebElement(4,firstRowAppearance);
+        wait.waitForVisibilityOfWebElement(4,firstRowAppearance);
         jsExecutor.executeScript("arguments[0].click()",firstRowAppearance);
     }
 

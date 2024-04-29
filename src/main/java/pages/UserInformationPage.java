@@ -87,32 +87,7 @@ public class UserInformationPage extends BasePage {
     public void clickOnSaveBtn() {
         saveBtnWebElement = this.getBrowser().findElement(saveBtn);
         jsExecutor.executeScript("arguments[0].click()", saveBtnWebElement);
-//        javaScriptExecutor.executeScript("window.scrollTo(0, 900);");
-//        this.getBrowser().findElement(saveBtn).saveBtnWebElement();
     }
-
-//    public void testQaMenuAccess() {
-//        userInfoObject = new UserInfoObject();
-//        List<WebElement> actual = this.getBrowser().findElements(menuList);
-//        boolean allValuesFound = true;
-//        for (String menuCheckBox : userInfoObject.menuCheckBox) {
-//            boolean valueFound = false;
-//            for (WebElement element : actual) {
-//                String elementText = element.getText();
-//                if (elementText.contains(menuCheckBox)) {
-//                    valueFound = true;
-//                    break;
-//                }
-//            }
-//
-//            if (!valueFound) {
-//                allValuesFound = false;
-//                break;
-//            }
-//        }
-//        Assert.assertTrue(allValuesFound);
-//    }
-
 
 }
 

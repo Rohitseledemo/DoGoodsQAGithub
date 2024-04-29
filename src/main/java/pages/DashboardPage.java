@@ -2,12 +2,16 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import utility.WebDriverWaits;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardPage extends BasePage {
+    WebDriverWaits wait;
+
     List<WebElement> menuItemListWebElements;
+
     By signOutBtn;
     By sideMenuItemEarnings;
     By sideMenuItemUserDirectory;
@@ -23,22 +27,30 @@ public class DashboardPage extends BasePage {
     }
 
     public void clickOnEarnings() {
-        this.driver.waitForPresenceOfElement(4, sideMenuItemEarnings);
+        wait = new WebDriverWaits(this.getBrowser());
+
+        wait.waitForPresenceOfElement(4, sideMenuItemEarnings);
         this.getBrowser().findElement(sideMenuItemEarnings).click();
     }
 
     public void clickOnUserDirectory() {
-        this.driver.waitForPresenceOfElement(4, sideMenuItemUserDirectory);
+        wait = new WebDriverWaits(this.getBrowser());
+
+        wait.waitForPresenceOfElement(4, sideMenuItemUserDirectory);
         this.getBrowser().findElement(sideMenuItemUserDirectory).click();
     }
 
     public void clickOnCustomer() {
-        this.driver.waitForPresenceOfElement(4, getSideMenuCustomer);
+        wait = new WebDriverWaits(this.getBrowser());
+
+        wait.waitForPresenceOfElement(4, getSideMenuCustomer);
         this.getBrowser().findElement(getSideMenuCustomer).click();
     }
 
     public List<WebElement> getAllMenuItemNames() {
-        this.driver.waitForPresenceOfElement(4, menuItemList);
+        wait = new WebDriverWaits(this.getBrowser());
+
+        wait.waitForPresenceOfElement(4, menuItemList);
         return this.getBrowser().findElements(menuItemList);
     }
 
@@ -67,14 +79,16 @@ public class DashboardPage extends BasePage {
 
 
         public boolean checkDashboardMenuList(List<String> menuNames) {
+            wait = new WebDriverWaits(this.getBrowser());
+
             boolean allValuesFound = true;
-            this.driver.waitForPresenceOfElement(4,menuItemList);
+            wait.waitForPresenceOfElement(4,menuItemList);
             menuItemListWebElements = this.getBrowser().findElements(menuItemList);
             if (menuItemListWebElements.size() != menuNames.size()) {
                 allValuesFound = false;
             }
             else {
-                System.out.println(menuNames);;//to avoid this loop in case size!=
+                 //to avoid this loop in case size!=
                 for (int i = 0; i < menuItemListWebElements.size(); i++) {
                     String elementText = menuItemListWebElements.get(i).getText();
 //                    String menuListText = menuNames.get(i);

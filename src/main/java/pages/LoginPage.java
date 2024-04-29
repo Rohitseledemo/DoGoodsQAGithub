@@ -2,8 +2,11 @@ package pages;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import utility.BrowserKeeper;
+import utility.WebDriverWaits;
 
 public class LoginPage extends BasePage{
+    WebDriverWaits wait;
+
     By emailAddress;
     By password;
     By signIn;
@@ -27,7 +30,8 @@ public class LoginPage extends BasePage{
         this.loginSuccessCheck=By.xpath("//div[@class='card-body']");
     }
     public void setEmailAddress(String inputEmail){
-        this.driver.waitForPresenceOfElement(4,emailAddress);
+        wait = new WebDriverWaits(this.getBrowser());
+        wait.waitForPresenceOfElement(4,emailAddress);
     	this.getBrowser().findElement(emailAddress).sendKeys(inputEmail);
     }
     public void setPassword(String inputPassword){
@@ -40,27 +44,33 @@ public class LoginPage extends BasePage{
     	this.getBrowser().findElement(rememberMe).click();
     }
     public void verifyForgetPasswordClick(){
-        this.driver.waitForPresenceOfElement(2,forgetPassword);
+        wait = new WebDriverWaits(this.getBrowser());
+        wait.waitForPresenceOfElement(2,forgetPassword);
         this.getBrowser().findElement(forgetPassword).click();
     }
     public boolean wrongEmailErrorDisplayed(){
-        this.driver.waitForPresenceOfElement(2,loginSuccessCheck);
+        wait = new WebDriverWaits(this.getBrowser());
+        wait.waitForPresenceOfElement(2,loginSuccessCheck);
         return this.getBrowser().findElement(emailError).isDisplayed();
     }
     public boolean wrongPasswordErrorDisplayed(){
-        this.driver.waitForPresenceOfElement(2,passwordError);
+        wait = new WebDriverWaits(this.getBrowser());
+        wait.waitForPresenceOfElement(2,passwordError);
         return this.getBrowser().findElement(passwordError).isDisplayed();
     }
     public boolean emptyPasswordErrorDisplayed(){
-        this.driver.waitForPresenceOfElement(2,emptyPasswordError);
+        wait = new WebDriverWaits(this.getBrowser());
+        wait.waitForPresenceOfElement(2,emptyPasswordError);
         return this.getBrowser().findElement(emptyPasswordError).isDisplayed();
     }
     public boolean emptyEmailErrorDisplayed(){
-        this.driver.waitForPresenceOfElement(2,emptyEmailError);
+        wait = new WebDriverWaits(this.getBrowser());
+        wait.waitForPresenceOfElement(2,emptyEmailError);
         return this.getBrowser().findElement(emptyEmailError).isDisplayed();
     }
     public boolean loginVerify(){
-        this.driver.waitForPresenceOfElement(2,loginSuccessCheck);
+        wait = new WebDriverWaits(this.getBrowser());
+        wait.waitForPresenceOfElement(2,loginSuccessCheck);
         this.getBrowser().findElement(loginSuccessCheck).click();
         return this.getBrowser().findElement(loginSuccessCheck).isDisplayed();
     }
