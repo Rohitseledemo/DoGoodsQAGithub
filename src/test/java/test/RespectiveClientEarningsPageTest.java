@@ -40,7 +40,8 @@ public class RespectiveClientEarningsPageTest {
         loginPage.rememberMeClick();
         loginPage.signInClick();
         dashboardPage.clickOnEarnings();
-        earningsPage.typeClientNameAndClickOnIt("Selenium Testing");
+        earningsPage.filterByClientName("Selenium Testing");
+        earningsPage.filteredClientClick();
         respectiveClientEarningsPage.generateEarningsBtnClick();
         respectiveClientEarningsPage.datePickerHandler(dateValue,yearValue);
 

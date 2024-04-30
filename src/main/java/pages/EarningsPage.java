@@ -1,13 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import utility.WebDriverWaits;
 
 import java.time.Duration;
@@ -49,20 +43,45 @@ public class EarningsPage extends BasePage {
         wait.waitForPresenceOfElement(4, title);
         return this.getBrowser().findElement(title).isDisplayed();
     }
+    public void filterByClientName(String clientName){
+        wait = new WebDriverWaits(this.getBrowser());
+        wait.waitForVisibilityOfWebElement(4,this.getBrowser().findElement(clientTitle));
 
-    public void typeClientNameAndClickOnIt(String clientName) {
+        this.getBrowser().findElement(companyTextBox).sendKeys(clientName);
+        wait.waitForNumberOfElementsToBeLessThan(clientNamesList,2);
+    }
+
+    public void filteredClientClick() {
         wait = new WebDriverWaits(this.getBrowser());
 
-        wait.waitForVisibilityOfWebElement(4,this.getBrowser().findElement(clientTitle));
-        this.getBrowser().findElement(companyTextBox).sendKeys(clientName);
-//        Actions ac = new Actions(this.getBrowser());
-//        ac.moveToElement(this.getBrowser().findElement(companyTextBox)).click();
-//        ac.sendKeys(this.getBrowser().findElement(companyTextBox),clientName, Keys.RETURN).build().perform();
-//        ac.sendKeys(clientName, Keys.RETURN).build().perform();
-        wait.waitForNumberOfElementsToBeLessThan(clientNamesList,2);
         WebElement firstRowAppearance = this.getBrowser().findElement(clientNamesList);
         wait.waitForVisibilityOfWebElement(4,firstRowAppearance);
         jsExecutor.executeScript("arguments[0].click()",firstRowAppearance);
+    }
+
+    public void clientNameClick(String clientName){
+        wait = new WebDriverWaits(this.getBrowser());
+        this.getBrowser().manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
+
+        wait.waitForVisibilityOfWebElement(4,this.getBrowser().findElement(clientTitle));
+        List<WebElement> clientNames = this.getBrowser().findElements(clientNamesList);
+        for (int i=0;i<clientNames.size();i++){
+
+           String clientText = clientNames.get(i).getText();
+            if (clientText == null) {
+                try {
+                    clientText = this.getBrowser().findElements(clientNamesList).get(i).getText();
+                } catch (org.openqa.selenium.StaleElementReferenceException ex) {
+                    // If element is stale, re-locating it
+                    clientText = this.getBrowser().findElements(clientNamesList).get(i).getText();
+                }
+            }
+           if (clientText.equalsIgnoreCase(clientName)){
+               WebElement clientElement = clientNames.get(i);
+               jsExecutor.executeScript("arguments[0].click()",clientElement);
+               break;
+           }
+        }
     }
 
     public boolean searchEarningsClientsInList() {
