@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utility.WebDriverWaits;
 
 import java.time.Duration;
@@ -48,10 +50,12 @@ public class EarningsPage extends BasePage {
     public void filterByClientName(String clientName) throws InterruptedException {
         wait = new WebDriverWaits(this.getBrowser());
         wait.waitForVisibilityOfWebElement(4,this.getBrowser().findElement(clientTitle));
-        Thread.sleep(3000);
+        Thread.sleep(1700);
+        WebDriverWait waits = new WebDriverWait(this.getBrowser(),Duration.ofSeconds(2));
         Actions action =  new Actions(this.getBrowser());
 
         this.getBrowser().findElement(companyTextBox).sendKeys(clientName, Keys.ENTER);
+        waits.until(ExpectedConditions.attributeToBe(companyTextBox,"value",clientName));
         wait.waitForNumberOfElementsToBeLessThan(clientNamesList,2);
     }
 
