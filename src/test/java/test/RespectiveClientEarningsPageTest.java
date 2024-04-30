@@ -29,7 +29,7 @@ public class RespectiveClientEarningsPageTest {
     }
 
     @Test(dataProvider = "getDatePickerData")
-    public void generateEarningsBtnTest(String scenario, String dateValue, String yearValue){
+    public void generateEarningsBtnTest(String scenario, String dateValue, String yearValue) throws InterruptedException {
         dashboardPage = new DashboardPage();
         earningsPage = new EarningsPage();
         respectiveClientEarningsPage = new RespectiveClientEarningsPage();
