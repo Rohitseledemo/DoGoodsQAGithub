@@ -2,13 +2,10 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import utility.WebDriverWaits;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -50,16 +47,25 @@ public class EarningsPage extends BasePage {
     public void filterByClientName(String clientName) throws InterruptedException {
         wait = new WebDriverWaits(this.getBrowser());
         wait.waitForVisibilityOfWebElement(4,this.getBrowser().findElement(clientTitle));
-        Thread.sleep(2000);
-
-        this.getBrowser().findElement(companyTextBox).sendKeys(clientName, Keys.ENTER);
+        try{
+            this.getBrowser().findElement(companyTextBox).sendKeys(clientName, Keys.ENTER);
+        }
+        catch(StaleElementReferenceException e){
+            System.out.println("Caught StaleElementReferenceException: " + e.getMessage());
+            WebElement staleElement = this.driver.staleElementRetry(companyTextBox,2,1000);
+            if (staleElement != null) {
+                // Performing the action again on the returned staleElement
+                staleElement.sendKeys(clientName, Keys.ENTER);
+            } else {
+                System.out.println("Element not found after retries.");
+            }
+        }
     }
 
     public void filteredClientClick() throws InterruptedException {
         wait = new WebDriverWaits(this.getBrowser());
 
         wait.waitForNumberOfElementsToBeLessThan(clientNamesList,2);
-        Thread.sleep(500);
 
         WebElement firstRowAppearance = this.getBrowser().findElement(clientNamesList);
         wait.waitForVisibilityOfWebElement(4,firstRowAppearance);
