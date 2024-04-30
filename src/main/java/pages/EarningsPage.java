@@ -43,9 +43,10 @@ public class EarningsPage extends BasePage {
         wait.waitForPresenceOfElement(4, title);
         return this.getBrowser().findElement(title).isDisplayed();
     }
-    public void filterByClientName(String clientName){
+    public void filterByClientName(String clientName) throws InterruptedException {
         wait = new WebDriverWaits(this.getBrowser());
         wait.waitForVisibilityOfWebElement(4,this.getBrowser().findElement(clientTitle));
+        Thread.sleep(3000);
 
         this.getBrowser().findElement(companyTextBox).sendKeys(clientName);
         wait.waitForNumberOfElementsToBeLessThan(clientNamesList,2);

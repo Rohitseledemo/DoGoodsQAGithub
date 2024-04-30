@@ -31,7 +31,7 @@ public class ClientInvoiceDetailsPageTest {
 
 
     @Test
-    public void monthlyEarningsTest() {
+    public void monthlyEarningsTest() throws InterruptedException {
         boolean finalResult;
         dashboardPage = new DashboardPage();
         earningsPage = new EarningsPage();
@@ -52,7 +52,7 @@ public class ClientInvoiceDetailsPageTest {
     }
 
     @Test
-    public void viewDetailsBtnValidation(){
+    public void viewDetailsBtnValidation() throws InterruptedException {
         dashboardPage = new DashboardPage();
         earningsPage = new EarningsPage();
         respectiveClientEarningsPage = new RespectiveClientEarningsPage();
@@ -71,7 +71,7 @@ public class ClientInvoiceDetailsPageTest {
     }
 
     @Test
-    public void accountValidation(){
+    public void accountValidation() throws InterruptedException {
         boolean result;
         dashboardPage = new DashboardPage();
         earningsPage = new EarningsPage();
@@ -91,7 +91,7 @@ public class ClientInvoiceDetailsPageTest {
         Assert.assertTrue(result);
     }
     @Test
-    public void monthValidation(){
+    public void monthValidation() throws InterruptedException {
         boolean result;
         dashboardPage = new DashboardPage();
         earningsPage = new EarningsPage();
@@ -112,7 +112,7 @@ public class ClientInvoiceDetailsPageTest {
     }
 
     @Test
-    public void groundEntriesCountTest() {
+    public void groundEntriesCountTest() throws InterruptedException {
         earningsPage = new EarningsPage();
         dashboardPage = new DashboardPage();
         dashboardPage = new DashboardPage();
