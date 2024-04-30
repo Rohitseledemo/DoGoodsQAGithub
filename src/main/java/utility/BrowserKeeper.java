@@ -1,20 +1,14 @@
 package utility;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.Duration;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class BrowserKeeper { 
   private static WebDriver browser;
@@ -44,9 +38,24 @@ public class BrowserKeeper {
 	return browser;
    }
 
-   public void staleElementRetry(By element){
+   public WebElement staleElementRetry(By locator,int maxAttempts, long retryInterval){
+       int attempts = 0;
+       WebElement staleElement = null;
 
+       while (attempts < maxAttempts) {
+           try {
+               staleElement = browser.findElement(locator);
+               break;
+           } catch (StaleElementReferenceException e) {
+               try {
+                   Thread.sleep(retryInterval);
+               } catch (InterruptedException ex) {
+                   Thread.currentThread().interrupt();
+               }
+           }
+           attempts++;
+       }
+       return staleElement;
    }
 
-
-}
+   }
