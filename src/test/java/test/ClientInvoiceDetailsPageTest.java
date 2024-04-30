@@ -44,7 +44,8 @@ public class ClientInvoiceDetailsPageTest {
         loginPage.rememberMeClick();
         loginPage.signInClick();
         dashboardPage.clickOnEarnings();
-        earningsPage.typeClientNameAndClickOnIt("Activ");
+        earningsPage.filterByClientName("Activ");
+        earningsPage.filteredClientClick();
         respectiveClientEarningsPage.compareDates();
         finalResult = clientInvoiceDetailsPage.totalSavingsCalculate();
         Assert.assertTrue(finalResult);
@@ -63,7 +64,8 @@ public class ClientInvoiceDetailsPageTest {
         loginPage.rememberMeClick();
         loginPage.signInClick();
         dashboardPage.clickOnEarnings();
-        earningsPage.typeClientNameAndClickOnIt("Activ");
+        earningsPage.filterByClientName("Activ");
+        earningsPage.filteredClientClick();
         respectiveClientEarningsPage.clickOnEarningsIcon(0);
         Assert.assertTrue(clientInvoiceDetailsPage.viewDetailsBtnVerify());
     }
@@ -82,7 +84,8 @@ public class ClientInvoiceDetailsPageTest {
         loginPage.rememberMeClick();
         loginPage.signInClick();
         dashboardPage.clickOnEarnings();
-        earningsPage.typeClientNameAndClickOnIt("Azazie");
+        earningsPage.filterByClientName("Azazie");
+        earningsPage.filteredClientClick();
         respectiveClientEarningsPage.clickOnEarningsIcon();
         result = clientInvoiceDetailsPage.changeAccountAndValidateTotalSavings();
         Assert.assertTrue(result);
@@ -101,14 +104,15 @@ public class ClientInvoiceDetailsPageTest {
         loginPage.rememberMeClick();
         loginPage.signInClick();
         dashboardPage.clickOnEarnings();
-        earningsPage.typeClientNameAndClickOnIt("Azazie");
+        earningsPage.filterByClientName("Azazie");
+        earningsPage.filteredClientClick();
         respectiveClientEarningsPage.clickOnEarningsIcon();
         result = clientInvoiceDetailsPage.changeMonthAndValidateTotalSavings();
         Assert.assertTrue(result);
     }
 
     @Test
-    public void groundEntriesCountTest() throws InterruptedException {
+    public void groundEntriesCountTest() {
         earningsPage = new EarningsPage();
         dashboardPage = new DashboardPage();
         dashboardPage = new DashboardPage();
@@ -126,7 +130,8 @@ public class ClientInvoiceDetailsPageTest {
         loginPage.signInClick();
         dashboardPage.clickOnEarnings();
         respectiveClientEarningsPage.verifyClientName();
-        earningsPage.typeClientNameAndClickOnIt("Selenium Testing");
+        earningsPage.filterByClientName("Selenium Testing");
+        earningsPage.filteredClientClick();
         respectiveClientEarningsPage.clickOnEarningsIcon();
         clientInvoiceDetailsPage.averageSavingsPkgDataCardClick();
         clientClickedName =clientInvoiceDetailsPage.clickOnService("Ground");
@@ -137,7 +142,7 @@ public class ClientInvoiceDetailsPageTest {
     }
 
     @Test
-    public void accountNumberBtnValidation(){
+    public void accountNumberBtnValidation() throws InterruptedException {
        loginPage = new LoginPage();
        dashboardPage = new DashboardPage();
        earningsPage = new EarningsPage();
@@ -150,7 +155,8 @@ public class ClientInvoiceDetailsPageTest {
        loginPage.rememberMeClick();
        loginPage.signInClick();
        dashboardPage.clickOnEarnings();
-       earningsPage.typeClientNameAndClickOnIt("Selenium Testing");
+        earningsPage.filterByClientName("Selenium Testing");
+        earningsPage.filteredClientClick();
        respectiveClientEarningsPage.clickOnAccountNumberBtnOnRight();
        int names = respectiveClientEarningsPage.countAccountBtnAccountNames();
        respectiveClientEarningsPage.clickInvoiceByAccountCheckbox();

@@ -215,7 +215,7 @@ public class ClientInvoiceDetailsPage extends BasePage{
         }
     }
 
-    public String groundEntriesCount() throws InterruptedException {
+    public String groundEntriesCount() {
          wait = new WebDriverWaits(this.getBrowser());
 
         String actualCount = null;
