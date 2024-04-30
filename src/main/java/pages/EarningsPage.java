@@ -1,7 +1,9 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import utility.WebDriverWaits;
 
 import java.time.Duration;
@@ -47,8 +49,9 @@ public class EarningsPage extends BasePage {
         wait = new WebDriverWaits(this.getBrowser());
         wait.waitForVisibilityOfWebElement(4,this.getBrowser().findElement(clientTitle));
         Thread.sleep(3000);
+        Actions action =  new Actions(this.getBrowser());
 
-        this.getBrowser().findElement(companyTextBox).sendKeys(clientName);
+        this.getBrowser().findElement(companyTextBox).sendKeys(clientName, Keys.ENTER);
         wait.waitForNumberOfElementsToBeLessThan(clientNamesList,2);
     }
 
