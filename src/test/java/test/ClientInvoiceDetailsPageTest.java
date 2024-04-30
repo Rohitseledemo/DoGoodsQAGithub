@@ -26,7 +26,7 @@ public class ClientInvoiceDetailsPageTest {
         this.password = password;
 
         loginPage = new LoginPage();
-        loginPage.launchNewBrowserInstance();
+        loginPage.launchNewBrowserInstance();// getting error here on remote web browser
     }
 
 

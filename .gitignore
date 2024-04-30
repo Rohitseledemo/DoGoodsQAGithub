@@ -59,5 +59,6 @@ Thumbs.db
 #	    browser = new ChromeDriver(option);
 
 #       //browserStack local login credentials
-#       String username = "rohitkumar_ufv9J8";
-#       String accessKey = "FYLuo28MBhzbbAhQCXxz";
+#       to be changed in environment variables of a system
+#       String username = "rohitkumar_6VXrLy";
+#       String accessKey = "H8bwKZRkzpqftThbyCT4";
