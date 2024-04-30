@@ -39,8 +39,13 @@ public class BrowserKeeper {
 
 
     }
+
    public  WebDriver getBrowserInstance() {
 	return browser;
+   }
+
+   public void staleElementRetry(By element){
+
    }
 
 

@@ -50,46 +50,20 @@ public class EarningsPage extends BasePage {
     public void filterByClientName(String clientName) throws InterruptedException {
         wait = new WebDriverWaits(this.getBrowser());
         wait.waitForVisibilityOfWebElement(4,this.getBrowser().findElement(clientTitle));
-        Thread.sleep(1700);
-        WebDriverWait waits = new WebDriverWait(this.getBrowser(),Duration.ofSeconds(2));
-        Actions action =  new Actions(this.getBrowser());
+        Thread.sleep(2000);
 
         this.getBrowser().findElement(companyTextBox).sendKeys(clientName, Keys.ENTER);
-        waits.until(ExpectedConditions.attributeToBe(companyTextBox,"value",clientName));
-        wait.waitForNumberOfElementsToBeLessThan(clientNamesList,2);
     }
 
-    public void filteredClientClick() {
+    public void filteredClientClick() throws InterruptedException {
         wait = new WebDriverWaits(this.getBrowser());
+
+        wait.waitForNumberOfElementsToBeLessThan(clientNamesList,2);
+        Thread.sleep(500);
 
         WebElement firstRowAppearance = this.getBrowser().findElement(clientNamesList);
         wait.waitForVisibilityOfWebElement(4,firstRowAppearance);
         jsExecutor.executeScript("arguments[0].click()",firstRowAppearance);
-    }
-
-    public void clientNameClick(String clientName){
-        wait = new WebDriverWaits(this.getBrowser());
-        this.getBrowser().manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
-
-        wait.waitForVisibilityOfWebElement(4,this.getBrowser().findElement(clientTitle));
-        List<WebElement> clientNames = this.getBrowser().findElements(clientNamesList);
-        for (int i=0;i<clientNames.size();i++){
-
-           String clientText = clientNames.get(i).getText();
-            if (clientText == null) {
-                try {
-                    clientText = this.getBrowser().findElements(clientNamesList).get(i).getText();
-                } catch (org.openqa.selenium.StaleElementReferenceException ex) {
-                    // If element is stale, re-locating it
-                    clientText = this.getBrowser().findElements(clientNamesList).get(i).getText();
-                }
-            }
-           if (clientText.equalsIgnoreCase(clientName)){
-               WebElement clientElement = clientNames.get(i);
-               jsExecutor.executeScript("arguments[0].click()",clientElement);
-               break;
-           }
-        }
     }
 
     public boolean searchEarningsClientsInList() {
