@@ -3,7 +3,7 @@ pipelines:
   branches:
     master:
       - step:
-          name: Prod Regression
+          name: Prod All
           caches:
             - maven
           script:

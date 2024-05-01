@@ -84,7 +84,7 @@ public class ClientInvoiceDetailsPageTest {
         loginPage.rememberMeClick();
         loginPage.signInClick();
         dashboardPage.clickOnEarnings();
-        earningsPage.filterByClientName("Azazie");
+        earningsPage.filterByClientName("Selenium Testing");
         earningsPage.filteredClientClick();
         respectiveClientEarningsPage.clickOnEarningsIcon();
         result = clientInvoiceDetailsPage.changeAccountAndValidateTotalSavings();
