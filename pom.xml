@@ -153,7 +153,8 @@
                                 <excludedGroups>${ExcludeTag}</excludedGroups>
                                 <!-- Suite testng xml file to consider for test execution -->
                                 <suiteXmlFiles>
-                                    <suiteXmlFile>testng.xml</suiteXmlFile>
+                                    <suiteXmlFile>DoGoodsQA.xml</suiteXmlFile>
+                                    <suiteXmlFile>DemoQA.xml</suiteXmlFile>
                                 </suiteXmlFiles>
                                 <argLine>
                                     -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"

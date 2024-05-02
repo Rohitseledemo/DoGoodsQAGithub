@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="DoGood-QA">
+        <parameter name ="Email" value="subdomain@dogoodsinc.com"/>
+        <parameter name="Password" value="Dev@Admin2023!"/>
+        <parameter name="URL" value="https://qa-demo.dogoodsinc.com/"/>
+        <classes>
+            <class name="DemoQATest.QADemoDoGoodTest"/>
+        </classes>
+    </test>
+</suite>

@@ -24,8 +24,8 @@ public class ClientInvoiceDetailsPage extends BasePage{
     By accountDropdown;
     By totalPrior;
     By totalCurrent;
-    By totalSavings;
-    By avgSavingsPerPkgBtn;
+    protected By totalSavings;
+    protected By avgSavingsPerPkgBtn;
     By dataValueGroundBtn;
     By dataValueFedExReturnBtn;
     By doGoodsInvoiceLink;
@@ -151,32 +151,29 @@ public class ClientInvoiceDetailsPage extends BasePage{
         float c= a-b;
         df = new DecimalFormat("#.##");
         float result = Float.parseFloat(df.format(c));
-        if(actual==result){
+        if(actual==result && actual>0){
              finalResult = true;
         }
         return finalResult;
     }
 
-    public boolean changeMonthAndValidateTotalSavings(){
+    public void changeMonthsByDropDown() {
         wait = new WebDriverWaits(this.getBrowser());
 
         boolean result = false;
         dateDropdownElement = this.getBrowser().findElement(dateDropdown);
         dateOptions = dateDropdownElement.findElements(By.tagName("option"));
         int dateOptionsSize = dateOptions.size();
-        for (int i=1;i<dateOptionsSize-2;i++){
+        for (int i = 1; i < dateOptionsSize - 2; i++) {
             dateDropdownElement = this.getBrowser().findElement(dateDropdown);
             dateOptions = dateDropdownElement.findElements(By.tagName("option"));
             dateOptions.get(i).click();
-            wait.waitForPresenceOfElement(6,totalSavings);
-            boolean check = totalSavingsCalculate();
-            if (check){
-                 result = true;
-            }
+            wait.waitForPresenceOfElement(6, totalSavings);
         }
-        return result;
     }
-    public boolean changeAccountAndValidateTotalSavings(){
+
+
+    public void changeAccountsByDropDown(){
         wait = new WebDriverWaits(this.getBrowser());
 
         boolean result= false;
@@ -184,18 +181,14 @@ public class ClientInvoiceDetailsPage extends BasePage{
         accountDropdownElement = this.getBrowser().findElement(accountDropdown);
         accountOptions = accountDropdownElement.findElements(By.tagName("option"));
         int accountOptionSize= accountOptions.size();
-        for (int i=1;i<accountOptionSize;i++){
+        for (int i=1;i<accountOptionSize;i++) {
             accountDropdownElement = this.getBrowser().findElement(accountDropdown);
             accountOptions = accountDropdownElement.findElements(By.tagName("option"));
             accountOptions.get(i).click();
-            wait.waitForPresenceOfElement(6,totalSavings);
-            boolean check = totalSavingsCalculate();
-            if (check){
-                result = true;
-            }
+            wait.waitForPresenceOfElement(6, totalSavings);
         }
-        return result;
     }
+
 
     public void doGoodsInvoiceLinkClick(){
         this.getBrowser().findElement(doGoodsInvoiceLink).click();

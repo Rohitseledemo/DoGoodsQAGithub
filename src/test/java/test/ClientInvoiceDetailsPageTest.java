@@ -87,7 +87,8 @@ public class ClientInvoiceDetailsPageTest {
         earningsPage.filterByClientName("Selenium Testing");
         earningsPage.filteredClientClick();
         respectiveClientEarningsPage.clickOnEarningsIcon();
-        result = clientInvoiceDetailsPage.changeAccountAndValidateTotalSavings();
+        clientInvoiceDetailsPage.changeAccountsByDropDown();
+        result = clientInvoiceDetailsPage.totalSavingsCalculate();
         Assert.assertTrue(result);
     }
     @Test
@@ -107,7 +108,8 @@ public class ClientInvoiceDetailsPageTest {
         earningsPage.filterByClientName("Azazie");
         earningsPage.filteredClientClick();
         respectiveClientEarningsPage.clickOnEarningsIcon();
-        result = clientInvoiceDetailsPage.changeMonthAndValidateTotalSavings();
+        clientInvoiceDetailsPage.changeMonthsByDropDown();
+        result = clientInvoiceDetailsPage.totalSavingsCalculate();
         Assert.assertTrue(result);
     }
 

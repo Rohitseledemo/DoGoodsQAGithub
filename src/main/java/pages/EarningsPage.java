@@ -47,6 +47,7 @@ public class EarningsPage extends BasePage {
     public void filterByClientName(String clientName) throws InterruptedException {
         wait = new WebDriverWaits(this.getBrowser());
         wait.waitForVisibilityOfWebElement(4,this.getBrowser().findElement(clientTitle));
+        //thik krna hai
         try{
             this.getBrowser().findElement(companyTextBox).sendKeys(clientName, Keys.ENTER);
         }

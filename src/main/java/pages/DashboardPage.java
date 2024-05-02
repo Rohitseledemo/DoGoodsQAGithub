@@ -11,12 +11,11 @@ public class DashboardPage extends BasePage {
     WebDriverWaits wait;
 
     List<WebElement> menuItemListWebElements;
-
     By signOutBtn;
     By sideMenuItemEarnings;
     By sideMenuItemUserDirectory;
     By getSideMenuCustomer;
-    By menuItemList;
+    protected By menuItemList;
 
     public DashboardPage() {
         this.signOutBtn = By.xpath("//a[normalize-space()='Sign Out']");
