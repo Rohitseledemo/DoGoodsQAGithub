@@ -1,7 +1,6 @@
-package test;
+package DoGoodsQATest;
 
-import org.testng.annotations.Test;
-import pages.ForgotPasswordPage;
+import DoGoodsQAPages.ForgotPasswordPage;
 
 public class ForgotPasswordPagePageTest {
     ForgotPasswordPage forgotPasswordPage;

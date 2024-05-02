@@ -1,11 +1,11 @@
-package test;
+package DoGoodsQATest;
 
 import org.testng.Assert;
 import org.testng.annotations.*;
-import pages.CustomerPage;
-import pages.DashboardPage;
-import pages.EarningsPage;
-import pages.LoginPage;
+import DoGoodsQAPages.CustomerPage;
+import DoGoodsQAPages.DashboardPage;
+import DoGoodsQAPages.EarningsPage;
+import DoGoodsQAPages.LoginPage;
 
 import java.net.MalformedURLException;
 

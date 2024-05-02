@@ -1,8 +1,8 @@
-package test;
-import pages.DashboardPage;
-import pages.EarningsPage;
-import pages.LoginPage;
-import pages.RespectiveClientEarningsPage;
+package DoGoodsQATest;
+import DoGoodsQAPages.DashboardPage;
+import DoGoodsQAPages.EarningsPage;
+import DoGoodsQAPages.LoginPage;
+import DoGoodsQAPages.RespectiveClientEarningsPage;
 
 import java.net.MalformedURLException;
 public class EarningsPageTest {

@@ -1,8 +1,7 @@
 package DemoQAPages;
 
 import org.openqa.selenium.By;
-import pages.BasePage;
-import pages.DashboardPage;
+import DoGoodsQAPages.DashboardPage;
 import utility.WebDriverWaits;
 
 public class DemoQADashboardPage extends DashboardPage {

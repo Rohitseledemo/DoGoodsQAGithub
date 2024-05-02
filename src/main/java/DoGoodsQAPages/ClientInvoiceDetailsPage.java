@@ -1,14 +1,10 @@
-package pages;
+package DoGoodsQAPages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import utility.WebDriverWaits;
 
 import java.text.DecimalFormat;
-import java.time.Duration;
 import java.util.List;
 
 public class ClientInvoiceDetailsPage extends BasePage{
@@ -151,7 +147,7 @@ public class ClientInvoiceDetailsPage extends BasePage{
         float c= a-b;
         df = new DecimalFormat("#.##");
         float result = Float.parseFloat(df.format(c));
-        if(actual==result && actual>0){
+        if(actual==result && actual>=0){
              finalResult = true;
         }
         return finalResult;

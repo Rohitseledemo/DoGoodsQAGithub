@@ -151,7 +151,7 @@
                                 <groups>${IncludeTag}</groups>
                                 <!--suppress UnresolvedMavenProperty -->
                                 <excludedGroups>${ExcludeTag}</excludedGroups>
-                                <!-- Suite testng xml file to consider for test execution -->
+                                <!-- Suite testng xml file to consider for DoGoodsQATest execution -->
                                 <suiteXmlFiles>
                                     <suiteXmlFile>DoGoodsQA.xml</suiteXmlFile>
                                     <suiteXmlFile>DemoQA.xml</suiteXmlFile>

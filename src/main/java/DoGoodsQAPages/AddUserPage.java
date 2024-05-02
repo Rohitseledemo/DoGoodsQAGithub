@@ -1,4 +1,4 @@
-package pages;
+package DoGoodsQAPages;
 
 import org.openqa.selenium.By;
 

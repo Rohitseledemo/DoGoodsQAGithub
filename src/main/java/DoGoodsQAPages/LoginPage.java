@@ -1,7 +1,5 @@
-package pages;
+package DoGoodsQAPages;
 import org.openqa.selenium.By;
-import org.testng.Assert;
-import utility.BrowserKeeper;
 import utility.WebDriverWaits;
 
 public class LoginPage extends BasePage{

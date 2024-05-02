@@ -1,9 +1,6 @@
 package userInputObjects;
 
-import pages.BasePage;
-import pages.UserInformationPage;
-
-import java.util.ArrayList;
+import DoGoodsQAPages.UserInformationPage;
 import java.util.List;
 
 public class UserInfoObject {
