@@ -1,12 +1,12 @@
 package DoGoodsQAPages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import utility.BrowserKeeper;
 import utility.WebDriverWaits;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 public class BasePage {
@@ -69,6 +69,13 @@ public class BasePage {
       wait.waitForPresenceOfElement(4,email);
       this.getBrowser().get(URL);
   }
+    public String getScreenshot(String testCaseName) throws IOException {
+        TakesScreenshot ts = (TakesScreenshot)this.getBrowser();
+        File source = ts.getScreenshotAs(OutputType.FILE);
+        File file = new File(System.getProperty("user.dir")+"//reports//"+testCaseName+".png");
+        FileUtils.copyFile(source,file);
+        return System.getProperty("user.dir")+"//reports//"+testCaseName+".png";
+    }
 
 }
   

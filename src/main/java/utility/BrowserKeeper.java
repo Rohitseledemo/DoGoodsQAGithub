@@ -32,7 +32,6 @@ public class BrowserKeeper {
        browser = new RemoteWebDriver(new URL("https://" + username + ":" + accessKey +
                "@hub.browserstack.com/wd/hub"), capabilities);
 
-
     }
 
    public  WebDriver getBrowserInstance() {
