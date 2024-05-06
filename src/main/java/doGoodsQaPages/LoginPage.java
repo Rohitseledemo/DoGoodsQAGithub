@@ -1,4 +1,4 @@
-package DoGoodsQAPages;
+package doGoodsQaPages;
 import org.openqa.selenium.By;
 import utility.WebDriverWaits;
 

@@ -1,8 +1,9 @@
-package DoGoodsQAPages;
+package doGoodsQaPages;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import utility.BrowserKeeper;
+import utility.JavaScriptExecutorMethods;
 import utility.WebDriverWaits;
 
 import java.io.File;
@@ -12,11 +13,7 @@ import java.net.MalformedURLException;
 public class BasePage {
     public BrowserKeeper driver;
 
-    JavascriptExecutor jsExecutor;
-
-
-    WebElement monthSelectDropdownElement;
-    WebElement yearSelectDropdownElement;
+    JavaScriptExecutorMethods javaScript;
 
     By email;
     By pass;
@@ -33,8 +30,7 @@ public class BasePage {
 
   public BasePage(){
 	  driver = new BrowserKeeper();
-
-      jsExecutor = (JavascriptExecutor)this.getBrowser();
+      javaScript = new JavaScriptExecutorMethods(this.getBrowser());
 
       this.email= By.xpath("//input[@id='email_addtess']");
       this.pass= By.xpath("//input[@id='login_pass']");
@@ -72,9 +68,9 @@ public class BasePage {
     public String getScreenshot(String testCaseName) throws IOException {
         TakesScreenshot ts = (TakesScreenshot)this.getBrowser();
         File source = ts.getScreenshotAs(OutputType.FILE);
-        File file = new File(System.getProperty("user.dir")+"//reports//"+testCaseName+".png");
+        File file = new File(System.getProperty("user.dir")+"//reports//do_goods_qa_report//"+testCaseName+".png");
         FileUtils.copyFile(source,file);
-        return System.getProperty("user.dir")+"//reports//"+testCaseName+".png";
+        return System.getProperty("user.dir")+"//reports//do_goods_qa_report//"+testCaseName+".png";
     }
 
 }

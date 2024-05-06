@@ -1,4 +1,4 @@
-package DoGoodsQAPages;
+package doGoodsQaPages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -74,7 +74,7 @@ public class RespectiveClientEarningsPage extends BasePage{
     }
     public void clickAccountBtnSubmitBtn(){
         WebElement accountBtnSubmitBtnElement = this.getBrowser().findElement(accountBtnSubmitBtn);
-        jsExecutor.executeScript("arguments[0].click()",accountBtnSubmitBtnElement);
+        javaScript.clickWebElement(accountBtnSubmitBtnElement);
     }
 
     public int countAccountBtnAccountNames(){
@@ -94,7 +94,7 @@ public class RespectiveClientEarningsPage extends BasePage{
     public void clickInvoiceByAccountCheckbox(){
         WebElement invoiceByAccountCheckboxElement = this.getBrowser().findElement(invoiceByAccountCheckbox);
         if (!invoiceByAccountCheckboxElement.isSelected()) {
-            jsExecutor.executeScript("arguments[0].click()", invoiceByAccountCheckboxElement);
+            javaScript.clickWebElement(invoiceByAccountCheckboxElement);
         }
     }
 
@@ -108,10 +108,13 @@ public class RespectiveClientEarningsPage extends BasePage{
         wait = new WebDriverWaits(this.getBrowser());
 
         wait.waitForPresenceOfElement(4,generateEarningsBtn);
-        jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(generateEarningsBtn));
+        javaScript.clickWebElement(this.getBrowser().findElement(generateEarningsBtn));
     }
 
     public void datePickerHandler(String dateValue, String yearValue){
+        WebElement monthSelectDropdownElement;
+        WebElement yearSelectDropdownElement;
+
         wait = new WebDriverWaits(this.getBrowser());
 
         WebElement datePickerElement = this.getBrowser().findElement(datePicker);
@@ -130,29 +133,29 @@ public class RespectiveClientEarningsPage extends BasePage{
         yearSelect.selectByVisibleText(yearValue);
 
         WebElement doneBtnElement = this.getBrowser().findElement(doneBtn);
-        jsExecutor.executeScript("arguments[0].click()", doneBtnElement);
+        javaScript.clickWebElement(doneBtnElement);
 
         WebElement goBtnElement = this.getBrowser().findElement(goBtn);
-        jsExecutor.executeScript("arguments[0].click()", goBtnElement);
+        javaScript.clickWebElement(goBtnElement);
     }
 
     public void clickOnEarningsIcon(){
         wait = new WebDriverWaits(this.getBrowser());
 
         WebElement getEarningIcon;
-        jsExecutor.executeScript("window.scrollTo(0, 800);");
+        javaScript.scrollIntoViewWebElement(this.getBrowser().findElement(earningsIcons));
         wait.waitForPresenceOfElement(4,earningsIcons);
         getEarningIcon = this.getBrowser().findElements(earningsIcons).get(dateIndex);
-        jsExecutor.executeScript("arguments[0].click()", getEarningIcon);
+        javaScript.clickWebElement(getEarningIcon);
     }
     public void clickOnEarningsIcon(int index){
         wait = new WebDriverWaits(this.getBrowser());
 
         WebElement getEarningIcon;
-        jsExecutor.executeScript("window.scrollTo(0, 800);");
+        javaScript.scrollIntoViewWebElement(this.getBrowser().findElement(earningsIcons));
         wait.waitForPresenceOfElement(4,earningsIcons);
         getEarningIcon = this.getBrowser().findElements(earningsIcons).get(index);
-        jsExecutor.executeScript("arguments[0].click()", getEarningIcon);
+        javaScript.clickWebElement(getEarningIcon);
     }
 
     public boolean generateEarningsNoDataFound(){

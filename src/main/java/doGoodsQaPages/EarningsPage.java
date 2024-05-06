@@ -1,9 +1,9 @@
-package DoGoodsQAPages;
+package doGoodsQaPages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
+import utility.JavaScriptExecutorMethods;
 import utility.WebDriverWaits;
 
 import java.util.ArrayList;
@@ -58,12 +58,11 @@ public class EarningsPage extends BasePage {
 
     public void filteredClientClick() throws InterruptedException {
         wait = new WebDriverWaits(this.getBrowser());
-
         wait.waitForNumberOfElementsToBeLessThan(clientNamesList,2);
 
         WebElement firstRowAppearance = this.getBrowser().findElement(clientNamesList);
         wait.waitForVisibilityOfWebElement(4,firstRowAppearance);
-        jsExecutor.executeScript("arguments[0].click()",firstRowAppearance);
+        javaScript.clickWebElement(firstRowAppearance);
     }
 
     public boolean searchEarningsClientsInList() {

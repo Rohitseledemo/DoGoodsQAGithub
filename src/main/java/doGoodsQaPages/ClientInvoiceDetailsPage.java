@@ -1,7 +1,8 @@
-package DoGoodsQAPages;
+package doGoodsQaPages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import utility.JavaScriptExecutorMethods;
 import utility.WebDriverWaits;
 
 import java.text.DecimalFormat;
@@ -61,10 +62,11 @@ public class ClientInvoiceDetailsPage extends BasePage{
 
     public boolean viewDetailsBtnVerify(){
         wait = new WebDriverWaits(this.getBrowser());
+        javaScript = new JavaScriptExecutorMethods(this.getBrowser());
 
         WebElement viewDetailsBtnElement = this.getBrowser().findElement(viewDetailsBtn);
         wait.waitForVisibilityOfWebElement(4,viewDetailsBtnElement);
-        jsExecutor.executeScript("arguments[0].click()",viewDetailsBtnElement);
+        javaScript.clickWebElement(viewDetailsBtnElement);
         wait.waitForPresenceOfElement(10,showEntriesBtn);
         return this.getBrowser().findElement(showEntriesBtn).isDisplayed();
     }
@@ -133,7 +135,7 @@ public class ClientInvoiceDetailsPage extends BasePage{
         wait = new WebDriverWaits(this.getBrowser());
 
         wait.waitForPresenceOfElement(4,avgSavingsPerPkgBtn);
-        jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(avgSavingsPerPkgBtn));
+        javaScript.clickWebElement(this.getBrowser().findElement(avgSavingsPerPkgBtn));
     }
 
     public boolean totalSavingsCalculate(){
@@ -218,7 +220,7 @@ public class ClientInvoiceDetailsPage extends BasePage{
             List<WebElement> lastBtnWebElement = this.getBrowser().findElements(pageNavigationBtns);
             int indexEle = lastBtnWebElement.size() - 1;
             WebElement ele = lastBtnWebElement.get(indexEle);
-            jsExecutor.executeScript("arguments[0].click()", ele);
+            javaScript.clickWebElement(ele);
             wait.waitForStalenessOfWebElement(4,ele);
 
             WebElement updatedActiveClassWebElement = this.getBrowser().findElement(currentActiveClass);

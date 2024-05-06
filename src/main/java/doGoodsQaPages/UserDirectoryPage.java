@@ -1,4 +1,4 @@
-package DoGoodsQAPages;
+package doGoodsQaPages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -44,18 +44,17 @@ public class UserDirectoryPage extends BasePage{
                 break;
             }
         }
-        jsExecutor.executeScript("window.scrollTo(0, 900);");
+        javaScript.scrollWebElement(0,900);
         WebElement indexListElement = this.getBrowser().findElements(By.xpath
                 ("//i[@class='fas fa-edit get_edit']")).get(index);
-        jsExecutor.executeScript("arguments[0].click()",indexListElement);
+        javaScript.clickWebElement(indexListElement);
 
     }
 
     public void logoutToLandingPage(){
         wait = new WebDriverWaits(this.getBrowser());
-
-        jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(yourProfile));
+        javaScript.clickWebElement(this.getBrowser().findElement(yourProfile));
         wait.waitForPresenceOfElement(2,logOut);
-        jsExecutor.executeScript("arguments[0].click()",this.getBrowser().findElement(logOut));
+        javaScript.clickWebElement(this.getBrowser().findElement(logOut));
     }
 }
