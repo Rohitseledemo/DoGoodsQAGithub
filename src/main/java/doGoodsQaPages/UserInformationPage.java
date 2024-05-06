@@ -1,4 +1,4 @@
-package DoGoodsQAPages;
+package doGoodsQaPages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,8 +17,6 @@ public class UserInformationPage extends BasePage {
     public List<String> clNames;
 
     UserInfoObject userInfoObject;
-
-    JavascriptExecutor js;
 
     By clientList;
     By menuList;
@@ -52,14 +50,14 @@ public class UserInformationPage extends BasePage {
 
         for (WebElement menuCheckbox : menuClickCheckboxes) {
             if (menuCheckbox.isSelected()) {
-                jsExecutor.executeScript("arguments[0].click()", menuCheckbox);
+                javaScript.clickWebElement(menuCheckbox);
             }
         }
         menuNames = new ArrayList<String>();
         for(int i :randomMenuIndex) {
                 WebElement menuIndexElement = menuClickWebElements.get(i);
-                jsExecutor.executeScript("arguments[0].scrollIntoView(true);", menuIndexElement);
-                jsExecutor.executeScript("arguments[0].click()", menuIndexElement);
+                javaScript.scrollIntoViewWebElement(menuIndexElement);
+                javaScript.clickWebElement(menuIndexElement);
                 menuNames.add(menuIndexElement.getText().toUpperCase());
             }
         return menuNames;
@@ -71,14 +69,14 @@ public class UserInformationPage extends BasePage {
         clientClickWebElements = this.getBrowser().findElements(clientList);
         for (WebElement clientCheckbox : clientClickCheckboxes) {
             if (clientCheckbox.isSelected()){
-                jsExecutor.executeScript("arguments[0].click()", clientCheckbox);
+                javaScript.clickWebElement(clientCheckbox);
             }
         }
         clNames = new ArrayList<>();
         for(int i : randomClientIndex) {
             clientIndexElement = clientClickWebElements.get(i);
-            jsExecutor.executeScript("arguments[0].scrollIntoView(true);", clientIndexElement);
-            jsExecutor.executeScript("arguments[0].click()", clientIndexElement);
+            javaScript.scrollIntoViewWebElement(clientIndexElement);
+            javaScript.clickWebElement(clientIndexElement);
                 clNames.add(clientIndexElement.getText());
             }
         return clNames;
@@ -86,7 +84,7 @@ public class UserInformationPage extends BasePage {
 
     public void clickOnSaveBtn() {
         saveBtnWebElement = this.getBrowser().findElement(saveBtn);
-        jsExecutor.executeScript("arguments[0].click()", saveBtnWebElement);
+        javaScript.clickWebElement(saveBtnWebElement);
     }
 
 }

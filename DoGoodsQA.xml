@@ -2,18 +2,18 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
     <listeners>
-        <listener class-name="utility.TestNGListeners"/>
+        <listener class-name="utility.DoGoodsQATestNGListeners"/>
     </listeners>
     <test verbose="2" preserve-order="true" name="DoGood-QA">
         <parameter name ="Email" value="admin@dogoodsinc.com"/>
         <parameter name="Password" value="Admin@Shipplug2024!"/>
         <parameter name="URL" value="https://qa-admin.dogoodsinc.com/admin/"/>
         <classes>
-            <class name="DoGoodsQATest.LoginPageTest"/>
-            <class name="DoGoodsQATest.RespectiveClientEarningsPageTest"/>
-            <class name="DoGoodsQATest.UserDirectoryPageTest"/>
-            <class name="DoGoodsQATest.UserInformationPageTest"/>
-            <class name="DoGoodsQATest.ClientInvoiceDetailsPageTest"/>
+            <class name="doGoodsQaTest.LoginPageTest"/>
+            <class name="doGoodsQaTest.RespectiveClientEarningsPageTest"/>
+            <class name="doGoodsQaTest.UserDirectoryPageTest"/>
+            <class name="doGoodsQaTest.UserInformationPageTest"/>
+            <class name="doGoodsQaTest.ClientInvoiceDetailsPageTest"/>
         </classes>
     </test>
 </suite>

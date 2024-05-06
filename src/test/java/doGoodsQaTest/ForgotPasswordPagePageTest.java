@@ -1,6 +1,6 @@
-package DoGoodsQATest;
+package doGoodsQaTest;
 
-import DoGoodsQAPages.ForgotPasswordPage;
+import doGoodsQaPages.ForgotPasswordPage;
 
 public class ForgotPasswordPagePageTest {
     ForgotPasswordPage forgotPasswordPage;

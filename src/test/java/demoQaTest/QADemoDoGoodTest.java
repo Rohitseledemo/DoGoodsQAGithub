@@ -1,8 +1,8 @@
-package DemoQATest;
+package demoQaTest;
 
-import DemoQAPages.DemoQADashboardPage;
-import DemoQAPages.DemoQALoginPage;
-import DemoQAPages.DemoQAPriorAgreementComparison;
+import demoQaPages.DemoQADashboardPage;
+import demoQaPages.DemoQALoginPage;
+import demoQaPages.DemoQAPriorAgreementComparison;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import java.net.MalformedURLException;

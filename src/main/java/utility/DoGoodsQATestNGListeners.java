@@ -1,21 +1,19 @@
 package utility;
 
-import DoGoodsQAPages.BasePage;
+import doGoodsQaPages.BasePage;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.io.IOException;
 
-import static utility.ReportGenerator.getReportObject;
+import static utility.DoGoodsQAReportGenerator.getDoGoodQAReportObject;
 
-public class TestNGListeners extends BasePage implements ITestListener {
-    WebDriver driver;
-    ExtentReports extent = ReportGenerator.getReportObject();
+public class DoGoodsQATestNGListeners extends BasePage implements ITestListener {
+    ExtentReports extent = DoGoodsQAReportGenerator.getDoGoodQAReportObject();
     ThreadLocal<ExtentTest> extentTest =  new ThreadLocal<ExtentTest>();//Making an object Thread Safe
     ExtentTest test;
 
@@ -23,7 +21,7 @@ public class TestNGListeners extends BasePage implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        getReportObject();
+        getDoGoodQAReportObject();
         test = extent.createTest(result.getMethod().getMethodName());
         extentTest.set(test);// gives unique thread id
 
@@ -35,13 +33,6 @@ public class TestNGListeners extends BasePage implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         extentTest.get().fail(result.getThrowable());
-//        try {
-//            driver = (WebDriver) result.getTestClass().getRealClass().getField("getBrowser()")
-//                    .get(result.getInstance());
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//        }
         String filePath;
         try {
             filePath= getScreenshot(result.getMethod().getMethodName());

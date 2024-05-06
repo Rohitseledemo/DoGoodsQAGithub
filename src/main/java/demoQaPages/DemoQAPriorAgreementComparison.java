@@ -1,8 +1,8 @@
-package DemoQAPages;
+package demoQaPages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import DoGoodsQAPages.ClientInvoiceDetailsPage;
+import doGoodsQaPages.ClientInvoiceDetailsPage;
 
 public class DemoQAPriorAgreementComparison extends ClientInvoiceDetailsPage {
     By surchargeSavings;

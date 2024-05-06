@@ -1,8 +1,8 @@
-package DoGoodsQATest;
+package doGoodsQaTest;
 
 import org.testng.Assert;
 import org.testng.annotations.*;
-import DoGoodsQAPages.LoginPage;
+import doGoodsQaPages.LoginPage;
 import java.net.MalformedURLException;
 
 public class LoginPageTest {

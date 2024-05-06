@@ -1,6 +1,6 @@
-package DemoQAPages;
+package demoQaPages;
 
-import DoGoodsQAPages.LoginPage;
+import doGoodsQaPages.LoginPage;
 
 public class DemoQALoginPage extends LoginPage {
     public DemoQALoginPage(){
