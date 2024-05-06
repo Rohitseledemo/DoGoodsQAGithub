@@ -19,24 +19,19 @@ public class BrowserKeeper {
    }
 
     public void setupWebDriver() throws MalformedURLException {
-//       String username = System.getenv("BROWSERSTACK_USERNAME");
-//       String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
-//       ChromeOptions option=new ChromeOptions();
-//       option.addArguments("start-maximized");
-//       MutableCapabilities capabilities = new MutableCapabilities();
-//       capabilities.setCapability("browserName", "Chrome");
-//       capabilities.setCapability(ChromeOptions.CAPABILITY, option);
-//       HashMap<String, String> browserstackOptions = new HashMap<String, String>();
-//       browserstackOptions.put("os", "Windows");
-//       capabilities.setCapability("bstack:options", browserstackOptions);
-//       browser = new RemoteWebDriver(new URL("https://" + username + ":" + accessKey +
-//               "@hub.browserstack.com/wd/hub"), capabilities);
+       String username = System.getenv("BROWSERSTACK_USERNAME");
+       String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
+       ChromeOptions option=new ChromeOptions();
+       option.addArguments("start-maximized");
+       MutableCapabilities capabilities = new MutableCapabilities();
+       capabilities.setCapability("browserName", "Chrome");
+       capabilities.setCapability(ChromeOptions.CAPABILITY, option);
+       HashMap<String, String> browserstackOptions = new HashMap<String, String>();
+       browserstackOptions.put("os", "Windows");
+       capabilities.setCapability("bstack:options", browserstackOptions);
+       browser = new RemoteWebDriver(new URL("https://" + username + ":" + accessKey +
+               "@hub.browserstack.com/wd/hub"), capabilities);
 
-        DesiredCapabilities caps=new DesiredCapabilities();
-		ChromeOptions option=new ChromeOptions();
-		option.addArguments("start-maximized");option.merge(caps);
-		System.setProperty("webdriver.chrome.driver","src/main/resources/chromeDriver/chromedriver.exe");
-	    browser = new ChromeDriver(option);
     }
 
    public  WebDriver getBrowserInstance() {
